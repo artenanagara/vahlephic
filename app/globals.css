@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fafafa;
+  color: #111;
+}
+
+/* ── Entrance animation (CSS, no JS required) ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Custom cursor ────────────────────────────────────────────────────────── */
+.custom-cursor *,
+.custom-cursor *::before,
+.custom-cursor *::after {
+  cursor: none !important;
+}
+
+/* White dot with mix-blend-mode: difference →
+   appears dark on light bg, light on dark bg automatically */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 7px; height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-200px, -200px);
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 32px; height: 32px;
+  margin: -16px 0 0 -16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(17, 17, 17, 0.28);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-200px, -200px);
+  will-change: transform;
+  transition:
+    width  0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+}
+
+.cursor-ring.is-hover {
+  width: 52px; height: 52px;
+  margin: -26px 0 0 -26px;
+  border-color: rgba(17, 17, 17, 0.1);
 }

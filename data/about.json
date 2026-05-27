@@ -1,0 +1,45 @@
+{
+  "bio": "I am a Product Designer with a keen eye for detail, specializing in design storytelling and stakeholder alignment. Focused on high-impact and seamless user experiences.",
+  "experience": {
+    "summary": "4+ years of experience working in design.",
+    "items": [
+      {
+        "role": "Product Designer",
+        "company": "PT. Rintisan Teknologi Waralaba",
+        "type": "Fulltime",
+        "period": "2022 - Now",
+        "logo": null
+      },
+      {
+        "role": "UI/UX Designer",
+        "company": "PT. Arkatama Multi Solusindo",
+        "type": "Intern",
+        "period": "2022 - 2022",
+        "logo": null
+      },
+      {
+        "role": "UI/UX Designer",
+        "company": "Skilvul",
+        "type": "Intern",
+        "period": "2021 - 2021",
+        "logo": null
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "University of Singaperbangsa Karawang",
+      "degree": "Bachelor's degree, Computer Science. GPA: 3.82",
+      "period": "2018 - 2022",
+      "logo": null
+    }
+  ],
+  "listening": [
+    { "artist": "Perunggu",      "album": "Dalam Dinamika",       "cover": null },
+    { "artist": "Perunggu",      "album": "Memorandum",           "cover": null },
+    { "artist": "Pamungkas",     "album": "Walk The Talk",        "cover": null },
+    { "artist": "Adele",         "album": "25",                   "cover": null },
+    { "artist": "Justin Bieber", "album": "My World",             "cover": null },
+    { "artist": "Hindia",        "album": "Menari Dalam Bayangan","cover": null }
+  ]
+}

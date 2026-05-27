@@ -1,0 +1,157 @@
+{
+  "slug": "nyaritempat",
+  "title": "nyaritempat.com",
+  "description": "A platform where you can find recommendations for WFC locations that match your criteria. All data is curated by admins and contributors.",
+  "meta": {
+    "role": "UX/UI Designer",
+    "timeline": "15 days",
+    "liveUrl": "https://nyaritempat.com"
+  },
+  "logo": "/works/nyaritempat/nyaritempat-logo.svg",
+  "hero": "/works/nyaritempat/thumbnail.png",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Project Over View",
+      "body": [
+        "The project originated from a discussion between me and two of my friends. We've always been enthusiastic about workation and remote working culture. We were working from home, but we had a common concern: it's difficult to find a suitable cafe. Sometimes the internet is unreliable, so we have a concern: it's difficult to find a suitable cafe. We often end up finding a place on our own.",
+        "My role was as <strong>Product Designer</strong>, while my two friends are <strong>fullstack developers</strong>."
+      ]
+    },
+    {
+      "id": "problem",
+      "title": "Problem",
+      "body": [
+        "Some of us spend our working days at coffee shops or cafes. Whether it's because we prefer the vibe of the place or simply want a change of environment. The main challenge is finding a reliable WFC (Work From Cafe) guide.",
+        "But have you ever felt confused looking for a cafe that matches your interest? There are so many options, especially for residents of Surabaya. Nowadays, the choices for WFC places are multiplying — from coffee shops and coffee stores to restaurants."
+      ],
+      "flow": {
+        "label": "Nah, the flow usually goes like this, right..",
+        "steps": [
+          "Ask a friend or open Instagram or Google Maps",
+          "Search for each recommended place one by one",
+          "Open their Instagram profile, check Google Maps, or ask your friend again",
+          "Keep searching back and forth until you find the right one",
+          "Get a choice of places",
+          "Visit the chosen place"
+        ]
+      },
+      "bodyAfterImage": [
+        "Even after going through this process, there's still a chance we won't find the place we're looking for. Or it's just sold out. Both options feel the same way. So, driven by this concern, we decided to build and develop the website nyaritempat.com"
+      ]
+    },
+    {
+      "id": "how-might-we",
+      "title": "How Might We",
+      "body": [
+        "After identifying the problem, the three of us conducted independent research — visiting local friends, benchmarking, and competitor analysis. We looked for solutions that could address the issue. Since this is our side project and we all have full-time jobs, we agreed to set a realistic schedule and hand off to the development team step by step."
+      ]
+    },
+    {
+      "id": "solution",
+      "title": "Solution",
+      "body": [
+        "We started by simplifying the process outlined in the problem section above. With nyaritempat.com, users now only need to go through 3 steps instead of 6."
+      ],
+      "beforeAfterFlow": {
+        "beforeLabel": "Before:",
+        "beforeSteps": [
+          "Ask a friend or open Instagram or Google Maps",
+          "Search for each recommended place one by one",
+          "Open their Instagram profile, check Google Maps, or ask your friend again",
+          "Keep searching back and forth until you find the right one",
+          "Get a choice of places",
+          "Visit the chosen place"
+        ],
+        "afterLabel": "After:",
+        "afterSteps": [
+          "Open the website nyaritempat.com",
+          "Find a place that suits your needs & read detailed information all in one place",
+          "Visit your chosen place"
+        ]
+      },
+      "bodyAfterImage": [
+        "The new flow has been agreed upon, then we looked for design references for the website later. Although the final output is a website, we are not limited to web references only; mobile apps are also considered."
+      ]
+    },
+    {
+      "id": "reference",
+      "title": "Reference",
+      "card": true,
+      "groups": [
+        {
+          "label": "Mobile App:",
+          "layout": "row",
+          "images": [
+            "/works/nyaritempat/image 2.png",
+            "/works/nyaritempat/image 4.png",
+            "/works/nyaritempat/image 5.png",
+            "/works/nyaritempat/image 7.png"
+          ]
+        },
+        {
+          "label": "Website:",
+          "layout": "row",
+          "images": [
+            "/works/nyaritempat/image 10.png",
+            "/works/nyaritempat/image 11.png"
+          ]
+        }
+      ],
+      "bodyAfterImage": [
+        "After gathering the references, I then started creating the final mockup. Then I continued the discussion with two other friends to see if further iterations were needed or if it was ready to move on to the development stage."
+      ]
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "intro": "Here is the final mockup design:",
+      "screens": [
+        {
+          "label": "Login & Register",
+          "images": [
+            "/works/nyaritempat/masuk-empty.png",
+            "/works/nyaritempat/daftar-akun-empty.png"
+          ]
+        },
+        {
+          "label": "Homepage",
+          "images": [
+            "/works/nyaritempat/fullview.png",
+            "/works/nyaritempat/typing search.png"
+          ]
+        },
+        {
+          "label": "Cafe Details & Review",
+          "images": [
+            "/works/nyaritempat/ringkasan.png",
+            "/works/nyaritempat/Ulasan filled.png"
+          ]
+        },
+        {
+          "label": "Profile",
+          "images": [
+            "/works/nyaritempat/profile-default.png",
+            "/works/nyaritempat/profile-guest-filled.png"
+          ]
+        },
+        {
+          "label": "All Area & Explore on web",
+          "images": [
+            "/works/nyaritempat/Semua cafe.png",
+            "/works/nyaritempat/Daftarkan-cafe.png"
+          ]
+        },
+        {
+          "label": "Footer",
+          "images": [
+            "/works/nyaritempat/footer.png"
+          ]
+        }
+      ],
+      "bodyAfterImage": [
+        "With revisions and feedback, here is the final mockup design for MVP 1. The next stage is development, which will be handled by two of my colleagues. After some time, the website went live at <a href=\"https://nyaritempat.com\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-medium underline\">nyaritempat.com</a>"
+      ]
+    }
+  ]
+}

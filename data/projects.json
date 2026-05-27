@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "nyaritempat",
+    "num": "01",
+    "title": "nyaritempat.com",
+    "description": "A platform where you can find recommendations for WFC locations that match your criteria. All data is curated by admins and contributors.",
+    "period": "2025 - Now",
+    "caseStudy": true,
+    "liveUrl": "https://nyaritempat.com",
+    "appStores": []
+  },
+  {
+    "slug": "kasheer",
+    "num": "02",
+    "title": "Kasheer",
+    "description": "Efficient MSME POS & Management.",
+    "period": "2023 - Now",
+    "caseStudy": false,
+    "liveUrl": "#",
+    "appStores": ["googlePlay"]
+  },
+  {
+    "slug": "billing-rintisan",
+    "num": "03",
+    "title": "Billing Rintisan",
+    "description": "Integrated Invoicing App.",
+    "period": "2022 - Now",
+    "caseStudy": false,
+    "liveUrl": "#",
+    "appStores": ["googlePlay", "apple"]
+  }
+]
