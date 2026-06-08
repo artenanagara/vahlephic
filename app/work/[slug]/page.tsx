@@ -141,9 +141,9 @@ function ImageGroups({ groups }: { groups: ImageGroup[] }) {
           )}
           {group.layout === "row" ? (
             /* Single flex row — all images equal width */
-            <div className="flex items-stretch gap-[10px]">
+            <div className="flex snap-x items-stretch gap-[10px] overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
               {group.images.map((img, ii) => (
-                <div key={ii} className="flex-1 overflow-hidden rounded-[6px]">
+                <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-[6px] sm:min-w-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={img}
@@ -155,12 +155,11 @@ function ImageGroups({ groups }: { groups: ImageGroup[] }) {
             </div>
           ) : (
             /* 2-column grid with shadow */
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {group.images.map((img, ii) => (
                 <div
                   key={ii}
                   className={`rounded-[8px] overflow-hidden ${cardShadow}`}
-                  style={{ width: "calc(50% - 6px)" }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -187,9 +186,9 @@ function OutcomeScreens({ screens }: { screens: Screen[] }) {
           <p className={`font-light text-[16px] leading-[20px] ${muted}`}>
             {screen.label}
           </p>
-          <div className="flex items-stretch gap-[10px]">
+          <div className="flex snap-x items-stretch gap-[10px] overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
             {screen.images.map((img, ii) => (
-              <div key={ii} className="flex-1 overflow-hidden rounded-[6px]">
+              <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-[6px] sm:min-w-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={img}
@@ -223,7 +222,7 @@ function Arrow({ dir }: { dir: "right" | "left" | "down" }) {
 function FlowCard({ text }: { text: string }) {
   return (
     <div
-      className="flex-1 overflow-hidden rounded-[12px] p-[6px] pt-[11px] flex"
+      className="flow-card-shell flex min-w-[120px] flex-1 overflow-hidden rounded-[12px] p-[6px] pt-[11px] sm:min-w-0"
       style={{
         height: 88,
         background: "linear-gradient(180deg, white 0%, #FBFBFB 81%, #F6F6F6 100%)",
@@ -231,7 +230,7 @@ function FlowCard({ text }: { text: string }) {
           "0px 0px 0px 1px #E5E5E5, 0px 4px 10px -5px rgba(35,54,55,0.24), inset 0px 0px 0px 2px white, 0px 10px 10px -6px rgba(0,0,0,0.01)",
       }}
     >
-      <div className="flex-1 bg-[#F6F6F6] rounded-[8px] border-[0.5px] border-[#E7E7E7] overflow-hidden flex items-center justify-center p-2">
+      <div className="flow-card-inner flex-1 bg-[#F6F6F6] rounded-[8px] border-[0.5px] border-[#E7E7E7] overflow-hidden flex items-center justify-center p-2">
         <p className="text-center text-[11.7px] font-normal leading-[1.4] text-[#4F4F4F]">
           {text}
         </p>
@@ -253,7 +252,8 @@ function ProblemFlow({ label, steps }: { label?: string; steps: string[] }) {
           {label}
         </p>
       )}
-      <div className="w-full flex flex-col items-end gap-2">
+      <div className="w-full overflow-x-auto pb-1">
+        <div className="flex min-w-[500px] flex-col items-end gap-2 sm:min-w-0">
         {/* Row 1: left → right */}
         <div className="w-full flex items-center gap-[6px]">
           {row1.map((text, i) => (
@@ -283,6 +283,7 @@ function ProblemFlow({ label, steps }: { label?: string; steps: string[] }) {
             </div>
           ))}
         </div>
+        </div>
       </div>
     </div>
   );
@@ -297,11 +298,12 @@ function AfterFlow({ label, steps }: { label?: string; steps: string[] }) {
           {label}
         </p>
       )}
-      <div className="w-full flex items-center gap-[6px]">
+      <div className="w-full overflow-x-auto pb-1">
+        <div className="flex min-w-[500px] items-center gap-[6px] sm:min-w-0">
         {steps.map((text, i) => (
           <div key={i} className="contents">
             <div
-              className="flex-1 overflow-hidden rounded-[12px] flex"
+              className="flow-card-shell flex-1 overflow-hidden rounded-[12px] flex"
               style={{
                 height: 88,
                 paddingTop: 11.7,
@@ -313,7 +315,7 @@ function AfterFlow({ label, steps }: { label?: string; steps: string[] }) {
                   "0px 0px 0px 1px #E5E5E5, 0px 4px 10px -5px rgba(35,54,55,0.24), inset 0px 0px 0px 2px white, 0px 10px 10px -6px rgba(0,0,0,0.01)",
               }}
             >
-              <div className="flex-1 bg-[#F0F9FE] rounded-[8px] border-[0.5px] border-[#E7E7E7] flex items-center justify-center p-2">
+              <div className="flow-card-inner flow-card-inner--after flex-1 bg-[#F0F9FE] rounded-[8px] border-[0.5px] border-[#E7E7E7] flex items-center justify-center p-2">
                 <p className="text-center text-[11.7px] font-normal leading-[1.4] text-[#4F4F4F]">
                   {text}
                 </p>
@@ -322,6 +324,7 @@ function AfterFlow({ label, steps }: { label?: string; steps: string[] }) {
             {i < steps.length - 1 && <Arrow dir="right" />}
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
@@ -345,7 +348,7 @@ function CaseSection({ section }: { section: WorkSection }) {
   if (section.card) {
     return (
       <div id={section.id} className="flex flex-col gap-5">
-        <div className="w-full rounded-[20px] bg-[#F8F8F8] border border-[#E9E9E9] p-4 flex flex-col gap-4">
+        <div className="w-full rounded-[16px] bg-[#F8F8F8] border border-[#E9E9E9] p-4 flex flex-col gap-4 sm:rounded-[20px]">
           <p className="font-semibold text-[16px] leading-[24px] text-[#111]">
             {section.title}
           </p>
@@ -428,14 +431,13 @@ export default async function WorkDetailPage({
 
       {/* ── Fixed sidebar ── */}
       <nav
-        className="fixed top-[200px] flex flex-col gap-8"
-        style={{ left: "calc(12.5% + 60px)" }}
+        className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-[620px] items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-[200px] lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none"
       >
         {/* Project icon */}
         {work.logo ? (
           <div className="shrink-0 inline-flex">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={work.logo} alt={`${work.title} logo`} className="h-8 w-auto block" />
+            <img src={work.logo} alt={`${work.title} logo`} className="project-logo h-8 w-auto block" />
           </div>
         ) : (
           <div className="size-8 rounded-[8.5px] overflow-hidden border border-[#e9e9e9] bg-[#f2f7ff] shrink-0 flex items-center justify-center">
@@ -447,32 +449,33 @@ export default async function WorkDetailPage({
         )}
 
         {/* Navigation */}
-        <div className="flex flex-col gap-4">
+        <div className="flex min-w-0 items-center gap-4 lg:flex-col lg:items-start">
           {/* Back link */}
           <Link
             href="/"
-            className={`flex items-center gap-1 font-light text-[14px] leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}
+            className={`flex shrink-0 items-center gap-1 font-light text-[14px] leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}
           >
             ← Back
           </Link>
 
-          <div className="h-px w-full bg-black/10" />
+          <div className="hidden h-px w-full bg-black/10 lg:block" />
 
           {/* Section anchors — active state tracked client-side */}
-          <SidebarNav items={sectionNavItems} />
+          <div className="hidden lg:block">
+            <SidebarNav items={sectionNavItems} />
+          </div>
         </div>
       </nav>
 
       {/* ── Scrollable content ── */}
       <div
-        className="pt-[200px] pb-20 flex flex-col gap-[60px]"
-        style={{ marginLeft: "calc(25% + 110px)", width: 500 }}
+        className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[60px] lg:px-0 lg:pt-[200px]"
       >
         {/* ── Header ── */}
         <div className="flex flex-col gap-5" style={{ animation: "fadeUp 0.72s cubic-bezier(0.22,1,0.36,1) backwards" }}>
           {/* Title + description */}
           <div className="flex flex-col gap-3">
-            <p className="font-semibold text-[28px] leading-[38px] text-[#111]">
+            <p className="font-semibold text-[26px] leading-[34px] text-[#111] sm:text-[28px] sm:leading-[38px]">
               {work.title}
             </p>
             <p className={`font-light text-base leading-[22px] ${muted}`}>
@@ -481,14 +484,14 @@ export default async function WorkDetailPage({
           </div>
 
           {/* Meta + Hero — outer container: #F8F8F8, rounded-[20px], border */}
-          <div className="w-full rounded-[20px] bg-[#F8F8F8] border border-[#E9E9E9] p-[6px] pb-3 flex flex-col gap-3">
+          <div className="w-full rounded-[16px] bg-[#F8F8F8] border border-[#E9E9E9] p-[6px] pb-3 flex flex-col gap-3 sm:rounded-[20px]">
 
             {/* Inner white card */}
             <div className="w-full bg-white rounded-[16px] border border-[#E9E9E9] p-[6px]">
               {/* Meta row: #FBFBFB bg, border #F0F0F0, rounded-[12px] */}
-              <div className="w-full bg-[#FBFBFB] rounded-[12px] border border-[#F0F0F0] p-4 flex items-start justify-between">
+              <div className="w-full bg-[#FBFBFB] rounded-[12px] border border-[#F0F0F0] p-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 {/* Left: Role + Timeline */}
-                <div className="flex items-center gap-8">
+                <div className="grid w-full grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:w-auto sm:flex sm:items-center sm:gap-8">
                   <div className="flex flex-col gap-[2px]">
                     <p className="font-medium text-[16px] leading-[22px] text-[rgba(17,17,17,0.8)]">
                       Role

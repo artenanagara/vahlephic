@@ -48,19 +48,19 @@ function ProjectCard({
   logo: React.ReactNode; caseStudy?: boolean; slug?: string; footer: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-6 w-full">
+    <div className="flex w-full flex-col gap-5 sm:gap-6">
       <div className="flex flex-col gap-4">
         <p className={`font-light text-base leading-[22px] ${muted}`}>{num}</p>
         <div className="flex flex-col gap-4">
           <p className="font-semibold text-2xl leading-9 text-[#111]">{title}</p>
           <p className={`font-light text-base leading-[22px] ${muted}`}>{description}</p>
         </div>
-        <div className="flex items-center gap-4">
-          <p className={`font-light text-base leading-[22px] ${muted} whitespace-nowrap`}>{period}</p>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <p className={`font-light text-base leading-[22px] ${muted}`}>{period}</p>
           {caseStudy && slug && (
             <>
               <div className="w-px h-[18px] bg-black/20" />
-              <Link href={`/work/${slug}`} className={`group/cs flex items-center gap-2 font-light text-base leading-[22px] ${muted} underline whitespace-nowrap`}>
+              <Link href={`/work/${slug}`} className={`group/cs flex items-center gap-2 font-light text-base leading-[22px] ${muted} underline`}>
                 Read case study
                 <img src={A.document} alt="" className="size-5 transition-transform duration-150 group-hover/cs:translate-x-[2px]" />
               </Link>
@@ -70,11 +70,11 @@ function ProjectCard({
       </div>
 
       <TiltCard className="flex flex-col w-full">
-        <div className={`relative h-[225px] w-full rounded-t-[12px] overflow-hidden flex items-center justify-center p-2 ${cardGradient} ${cardShadow}`}>
+        <div className={`relative flex h-[180px] w-full items-center justify-center overflow-hidden rounded-t-[12px] p-2 sm:h-[225px] ${cardGradient} ${cardShadow}`}>
           {logo}
           <div className={`absolute inset-0 rounded-t-[12px] pointer-events-none ${innerShadow}`} />
         </div>
-        <div className={`relative w-full rounded-b-[12px] overflow-hidden px-5 py-4 flex items-center justify-between ${cardGradient} ${cardShadow}`}>
+        <div className={`relative flex w-full flex-wrap items-center justify-between gap-3 overflow-hidden rounded-b-[12px] px-4 py-4 sm:px-5 ${cardGradient} ${cardShadow}`}>
           {footer}
           <div className={`absolute inset-0 rounded-b-[12px] pointer-events-none ${innerShadow}`} />
         </div>
@@ -94,15 +94,15 @@ function ExplorationCard({ src, num }: { src: string; num: number }) {
 const logoMap: Record<string, React.ReactNode> = {
   nyaritempat: (
     <img src="/works/nyaritempat/nyaritempat-logo.svg" alt="nyaritempat logo"
-         className="block" style={{ height: 28, width: "auto" }} />
+         className="project-logo block" style={{ height: 28, width: "auto" }} />
   ),
   kasheer: (
     <img src="/works/kasheer/kasheer-logo.png" alt="Kasheer logo"
-         className="block" style={{ height: 24, width: "auto" }} />
+         className="project-logo block" style={{ height: 24, width: "auto" }} />
   ),
   "billing-rintisan": (
     <img src="/works/rintisan/rintisan-logo.png" alt="Billing Rintisan logo"
-         className="block" style={{ height: 44, width: 44 }} />
+         className="project-logo block" style={{ height: 44, width: 44 }} />
   ),
 };
 
@@ -112,7 +112,7 @@ export default function WorkPage() {
     <div className="bg-[#fafafa] min-h-screen">
 
       {/* ── Fixed sidebar ── */}
-      <nav className="fixed top-[200px] flex flex-col gap-8" style={{ left: "calc(12.5% + 60px)" }}>
+      <nav className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-[620px] items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-[200px] lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none">
         <motion.div
           className="size-8 rounded-[8.5px] overflow-hidden border border-[#e9e9e9] bg-[#f2f7ff] shrink-0"
           initial={{ opacity: 0, scale: 0.7 }}
@@ -128,18 +128,18 @@ export default function WorkPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55, ease, delay: 0.1 }}
         >
-          <div className="flex flex-col gap-[6px] text-[14px]">
+          <div className="flex items-center gap-4 text-[14px] lg:flex-col lg:items-start lg:gap-[6px]">
             <Link href="/"      className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Home</Link>
             <p className="font-semibold text-[#111] leading-5">Work</p>
             <Link href="/about" className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>About</Link>
           </div>
-          <div className="h-px w-full bg-black/10" />
-          <a href="https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={`font-light text-[14px] leading-5 underline opacity-80 ${muted}`}>Download CV</a>
+          <div className="hidden h-px w-full bg-black/10 lg:block" />
+          <a href="https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={`hidden font-light text-[14px] leading-5 underline opacity-80 sm:block ${muted}`}>Download CV</a>
         </motion.div>
       </nav>
 
       {/* ── Scrollable content ── */}
-      <div className="pt-[200px] pb-20 flex flex-col gap-[80px]" style={{ marginLeft: "calc(25% + 110px)", width: 500 }}>
+      <div className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[80px] lg:px-0 lg:pt-[200px]">
 
         {/* ── Work section ── */}
         <div className="flex flex-col gap-[80px]">
@@ -166,7 +166,7 @@ export default function WorkPage() {
                 footer={
                   <>
                     {project.liveUrl && (
-                      <a href={project.liveUrl} className={`group/live flex items-center gap-[5px] font-light text-[14px] leading-[17px] ${muted} underline whitespace-nowrap`}>
+                      <a href={project.liveUrl} className={`group/live flex items-center gap-[5px] font-light text-[14px] leading-[17px] ${muted} underline`}>
                         Visit the live site
                         <img src={A.arrowUpRight} alt="" className="size-4 transition-transform duration-150 group-hover/live:translate-x-[2px] group-hover/live:-translate-y-[2px]" />
                       </a>
@@ -177,12 +177,12 @@ export default function WorkPage() {
                         <div className="flex items-center gap-1">
                           {project.appStores.includes("googlePlay") && (
                             <a href={project.appStoreUrls?.googlePlay} target="_blank" rel="noopener noreferrer" className="transition-transform duration-150 hover:scale-110 active:scale-95">
-                              <img src={A.googlePlay} alt="Google Play" className="size-5" />
+                              <img src={A.googlePlay} alt="Google Play" className="theme-store-icon size-5" />
                             </a>
                           )}
                           {project.appStores.includes("apple") && (
                             <a href={project.appStoreUrls?.apple} target="_blank" rel="noopener noreferrer" className="transition-transform duration-150 hover:scale-110 active:scale-95">
-                              <img src={A.apple} alt="App Store" className="size-5" />
+                              <img src={A.apple} alt="App Store" className="theme-store-icon size-5" />
                             </a>
                           )}
                         </div>

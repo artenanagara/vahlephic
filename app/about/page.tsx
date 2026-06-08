@@ -7,11 +7,11 @@ import aboutData from "@/data/about.json";
 import { FadeUp }     from "@/app/components/FadeUp";
 import { CharReveal } from "@/app/components/CharReveal";
 import { Footer }     from "@/app/components/Footer";
+import { ThemeToggle } from "@/app/components/ThemeToggle";
 
 // ─── Assets ───────────────────────────────────────────────────────────────────
 const A = {
   avatar: "/Logo.png",
-  moon:   "/Moon Icon.svg",
 };
 
 const muted = "text-[rgba(17,17,17,0.8)]";
@@ -182,7 +182,7 @@ export default function AboutPage() {
       />
 
       {/* ── Fixed sidebar ── */}
-      <nav className="fixed top-[200px] flex flex-col gap-8" style={{ left: "calc(12.5% + 60px)" }}>
+      <nav className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-[620px] items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-[200px] lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none">
         <motion.div
           className="size-8 rounded-[8.5px] overflow-hidden border border-[#e9e9e9] bg-[#f2f7ff] shrink-0"
           initial={{ opacity: 0, scale: 0.7 }}
@@ -198,24 +198,24 @@ export default function AboutPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55, ease, delay: 0.1 }}
         >
-          <div className="flex flex-col gap-[6px] text-[14px]">
+          <div className="flex items-center gap-4 text-[14px] lg:flex-col lg:items-start lg:gap-[6px]">
             <Link href="/"     className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Home</Link>
             <Link href="/work" className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Work</Link>
             <p className="font-semibold text-[#111] leading-5">About</p>
           </div>
-          <div className="h-px w-full bg-black/10" />
-          <a href="https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={`font-light text-[14px] leading-5 underline opacity-80 ${muted}`}>Download CV</a>
+          <div className="hidden h-px w-full bg-black/10 lg:block" />
+          <a href="https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={`hidden font-light text-[14px] leading-5 underline opacity-80 sm:block ${muted}`}>Download CV</a>
         </motion.div>
       </nav>
 
       {/* ── Scrollable content ── */}
-      <div className="pt-[136px] pb-20 flex flex-col gap-[80px]" style={{ marginLeft: "calc(25% + 110px)", width: 500 }}>
+      <div className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[80px] lg:px-0 lg:pt-[136px]">
 
         {/* ── Bio ── */}
         <div className="flex flex-col gap-6">
           <div className="flex items-start justify-between">
             <div className="flex flex-col gap-1">
-              <p className="font-semibold text-[28px] text-[#111]" style={{ lineHeight: "1.35" }}>
+              <p className="font-semibold text-[26px] text-[#111] sm:text-[28px]" style={{ lineHeight: "1.35" }}>
                 <CharReveal text="Rizal Vahlevi" startDelay={0.1} />
               </p>
               <motion.p
@@ -228,16 +228,7 @@ export default function AboutPage() {
                 <a href="https://rintisan.co.id" target="_blank" rel="noopener noreferrer" className={`font-medium underline decoration-solid ${muted}`}>Rintisan</a>
               </motion.p>
             </div>
-            <motion.button
-              aria-label="Toggle dark mode"
-              className="mt-1"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.45, ease, delay: 0.58 }}
-              whileHover={{ rotate: 22, transition: { duration: 0.3, ease: "easeOut" } }}
-            >
-              <img src={A.moon} alt="" className="size-5" />
-            </motion.button>
+            <ThemeToggle className="mt-1" />
           </div>
 
           <motion.p
@@ -260,19 +251,19 @@ export default function AboutPage() {
               </p>
               <div className="flex flex-col gap-2">
                 {aboutData.experience.items.map((item, i) => (
-                  <div key={i} className="flex items-center justify-between py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025]">
-                    <div className="flex items-center gap-3">
+                  <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
+                    <div className="flex min-w-0 items-center gap-3">
                       <LogoBox src={item.logo} alt={item.company} />
-                      <div className="flex flex-col gap-[2px]">
+                      <div className="flex min-w-0 flex-col gap-[2px]">
                         <p className="font-medium text-[16px] leading-[24px] text-[#111]">{item.role}</p>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                           <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{item.company}</p>
                           <div className="w-px h-3 bg-black/30 shrink-0" />
                           <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{item.type}</p>
                         </div>
                       </div>
                     </div>
-                    <p className={`font-light text-[14px] leading-[17px] ${muted} shrink-0`}>{item.period}</p>
+                    <p className={`font-light text-[14px] leading-[17px] ${muted} shrink-0 min-[520px]:text-right`}>{item.period}</p>
                   </div>
                 ))}
               </div>
@@ -286,15 +277,15 @@ export default function AboutPage() {
             <SectionHeader title="Education" />
             <div className="flex flex-col gap-2">
               {aboutData.education.map((edu, i) => (
-                <div key={i} className="flex items-center justify-between py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025]">
-                  <div className="flex items-center gap-3">
+                <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
+                  <div className="flex min-w-0 items-center gap-3">
                     <LogoBox src={edu.logo} alt={edu.institution} rounded="rounded-[7.94px]" />
-                    <div className="flex flex-col gap-[2px]">
+                    <div className="flex min-w-0 flex-col gap-[2px]">
                       <p className="font-medium text-[16px] leading-[24px] text-[#111]">{edu.institution}</p>
                       <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{edu.degree}</p>
                     </div>
                   </div>
-                  <p className={`font-light text-[14px] leading-[17px] ${muted} shrink-0 pt-[3.5px]`}>{edu.period}</p>
+                  <p className={`font-light text-[14px] leading-[17px] ${muted} shrink-0 pt-[3.5px] min-[520px]:text-right`}>{edu.period}</p>
                 </div>
               ))}
             </div>
@@ -307,15 +298,14 @@ export default function AboutPage() {
             <SectionHeader title="Listening to" />
             <div className="flex flex-col gap-3">
               {Array.from({ length: Math.ceil(aboutData.listening.length / 2) }).map((_, row) => (
-                <div key={row} className="flex justify-between">
+                <div key={row} className="grid grid-cols-1 gap-3 min-[520px]:grid-cols-2 min-[520px]:gap-4">
                   {aboutData.listening.slice(row * 2, row * 2 + 2).map((track, col) => {
                     const isPlaying = playingId === track.spotifyEmbed;
                     const isVisible = visibleId === track.spotifyEmbed;
                     return (
                       <div
                         key={col}
-                        className="flex items-center gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025]"
-                        style={{ width: 225 }}
+                        className="flex min-w-0 items-center gap-3 rounded-xl px-3 py-2 transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:-mx-3"
                         onMouseEnter={() => handleMouseEnter(track.spotifyEmbed)}
                         onMouseLeave={() => handleMouseLeave(track.spotifyEmbed)}
                       >
