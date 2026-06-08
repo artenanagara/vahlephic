@@ -1,17 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
 import aboutData from "@/data/about.json";
 import { FadeUp }     from "@/app/components/FadeUp";
 import { CharReveal } from "@/app/components/CharReveal";
+import { Footer }     from "@/app/components/Footer";
 
-// ─── Assets (expire 7 days from 2026-05-25) ───────────────────────────────────
+// ─── Assets ───────────────────────────────────────────────────────────────────
 const A = {
-  avatar:    "https://www.figma.com/api/mcp/asset/f6887da9-a0dd-4f1c-ac61-87b8c5aa845a",
-  moon:      "https://www.figma.com/api/mcp/asset/d695bfa2-6c2b-4e59-809c-686401735d29",
-  instagram: "https://www.figma.com/api/mcp/asset/63485ff5-a47e-4cbd-b98f-fd08cecb5139",
-  dribbble:  "https://www.figma.com/api/mcp/asset/20a67230-424f-47cd-99bb-dc946e5a8ddb",
-  linkedin:  "https://www.figma.com/api/mcp/asset/42db4c6d-e6ee-4c6b-b5d3-97dd51bbbf33",
+  avatar: "/Logo.png",
+  moon:   "/Moon Icon.svg",
 };
 
 const muted = "text-[rgba(17,17,17,0.8)]";
@@ -36,8 +35,123 @@ function LogoBox({ src, alt, rounded = "rounded-[10.75px]" }: { src: string | nu
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function AboutPage() {
+  // ── Spotify player state ──
+  const spotifyCtrl  = useRef<any>(null);
+  const [playerReady, setPlayerReady]   = useState(false);
+  const [playingId,   setPlayingId]     = useState<string | null>(null);
+  const [visibleId,   setVisibleId]     = useState<string | null>(null);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Load Spotify IFrame API once
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Make Spotify-injected elements invisible (keep in viewport for audio to work)
+    const hideSpotifyEl = (el: Element) => {
+      const h = el as HTMLElement;
+      h.style.opacity = "0";
+      h.style.pointerEvents = "none";
+    };
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(({ addedNodes }) => {
+        addedNodes.forEach((node) => {
+          if (!(node instanceof HTMLElement)) return;
+          const src = (node as HTMLIFrameElement).src ?? "";
+          if (src.includes("spotify") || node.id?.includes("spotify") || node.className?.includes?.("spotify")) {
+            hideSpotifyEl(node);
+          }
+          node.querySelectorAll?.("iframe[src*='spotify']").forEach(hideSpotifyEl);
+        });
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    const setup = (IFrameAPI: any) => {
+      const el = document.getElementById("sp-player");
+      if (!el) return;
+      IFrameAPI.createController(
+        el,
+        { uri: "spotify:track:76DzFyYlkByQMN4VXK7ynB", width: "300", height: "80" },
+        (ctrl: any) => {
+          spotifyCtrl.current = ctrl;
+          setPlayerReady(true);
+          // Hide the created iframe immediately
+          el.querySelectorAll("iframe").forEach(hideSpotifyEl);
+          ctrl.addListener("playback_update", (e: any) => {
+            if (e?.data?.isPaused) setPlayingId(null);
+          });
+        }
+      );
+    };
+
+    if ((window as any).onSpotifyIframeApiReady) {
+      // Already loaded — re-use
+    } else {
+      (window as any).onSpotifyIframeApiReady = setup;
+      if (!document.getElementById("spotify-api-script")) {
+        const s = document.createElement("script");
+        s.id  = "spotify-api-script";
+        s.src = "https://open.spotify.com/embed/iframe-api/v1";
+        s.async = true;
+        document.head.appendChild(s);
+      }
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Show the button for a track (cancel any pending hide)
+  const show = useCallback((id: string) => {
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    setVisibleId(id);
+  }, []);
+
+  // Start 3-second hide countdown
+  const scheduleHide = useCallback((id: string) => {
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => {
+      setVisibleId(prev => (prev === id ? null : prev));
+    }, 3000);
+  }, []);
+
+  const handleToggle = useCallback((embedId: string) => {
+    if (!spotifyCtrl.current) return;
+    const [type, trackId] = embedId.split("/");
+    const uri = `spotify:${type}:${trackId}`;
+
+    if (playingId === embedId) {
+      // Pause
+      spotifyCtrl.current.pause();
+      setPlayingId(null);
+      scheduleHide(embedId);
+    } else {
+      // Play (load new track if different)
+      spotifyCtrl.current.loadUri(uri);
+      spotifyCtrl.current.play();
+      setPlayingId(embedId);
+      show(embedId);
+    }
+  }, [playingId, scheduleHide, show]);
+
+  const handleMouseEnter = useCallback((id: string) => {
+    if (playerReady) show(id);
+  }, [playerReady, show]);
+
+  const handleMouseLeave = useCallback((id: string) => {
+    // Only hide if not playing this track
+    if (playingId !== id) setVisibleId(null);
+  }, [playingId]);
+
   return (
     <div className="bg-[#fafafa] min-h-screen">
+
+      {/* ── Spotify player — in viewport but invisible (audio needs to be in viewport) ── */}
+      <div
+        id="sp-player"
+        aria-hidden="true"
+        style={{ position: "fixed", bottom: 0, right: 0, width: 300, height: 80, pointerEvents: "none", zIndex: -1 }}
+      />
 
       {/* ── Fixed sidebar ── */}
       <nav className="fixed top-[200px] flex flex-col gap-8" style={{ left: "calc(12.5% + 60px)" }}>
@@ -62,7 +176,7 @@ export default function AboutPage() {
             <p className="font-semibold text-[#111] leading-5">About</p>
           </div>
           <div className="h-px w-full bg-black/10" />
-          <a href="#" className={`font-light text-[14px] leading-5 underline opacity-80 ${muted}`}>Download CV</a>
+          <a href="https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={`font-light text-[14px] leading-5 underline opacity-80 ${muted}`}>Download CV</a>
         </motion.div>
       </nav>
 
@@ -83,7 +197,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.55, ease, delay: 0.52 }}
               >
                 <span className={`font-light ${muted}`}>Product Designer at </span>
-                <a href="#" className={`font-medium underline decoration-solid ${muted}`}>Rintisan</a>
+                <a href="https://rintisan.co.id" target="_blank" rel="noopener noreferrer" className={`font-medium underline decoration-solid ${muted}`}>Rintisan</a>
               </motion.p>
             </div>
             <motion.button
@@ -163,20 +277,64 @@ export default function AboutPage() {
         <FadeUp>
           <div className="flex flex-col gap-6">
             <SectionHeader title="Listening to" />
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
               {Array.from({ length: Math.ceil(aboutData.listening.length / 2) }).map((_, row) => (
                 <div key={row} className="flex justify-between">
-                  {aboutData.listening.slice(row * 2, row * 2 + 2).map((track, col) => (
-                    <div key={col} className="flex items-center gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025]" style={{ width: 225 }}>
-                      <div className="size-[43px] rounded-[7.94px] overflow-hidden shrink-0 bg-[#f0f0f0]">
-                        {track.cover && <img src={track.cover} alt={track.album} className="w-full h-full object-cover" />}
+                  {aboutData.listening.slice(row * 2, row * 2 + 2).map((track, col) => {
+                    const isPlaying = playingId === track.spotifyEmbed;
+                    const isVisible = visibleId === track.spotifyEmbed;
+                    return (
+                      <div
+                        key={col}
+                        className="flex items-center gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025]"
+                        style={{ width: 225 }}
+                        onMouseEnter={() => handleMouseEnter(track.spotifyEmbed)}
+                        onMouseLeave={() => handleMouseLeave(track.spotifyEmbed)}
+                      >
+                        {/* Album cover with play/pause overlay */}
+                        <button
+                          onClick={() => handleToggle(track.spotifyEmbed)}
+                          className="relative size-[43px] rounded-[7.94px] overflow-hidden shrink-0 bg-[#f0f0f0] focus:outline-none"
+                          aria-label={isPlaying ? "Pause" : "Play preview"}
+                        >
+                          {track.cover && (
+                            <img src={track.cover} alt={track.album} className="w-full h-full object-cover" />
+                          )}
+                          {/* Overlay — only visible on hover or while playing */}
+                          <motion.div
+                            className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-[7.94px]"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: isVisible || isPlaying ? 1 : 0 }}
+                            transition={{ duration: 0.18 }}
+                          >
+                            {isPlaying ? (
+                              /* Pause */
+                              <svg width="12" height="14" viewBox="0 0 12 14" fill="white">
+                                <rect x="1" y="1" width="3.5" height="12" rx="1.5"/>
+                                <rect x="7.5" y="1" width="3.5" height="12" rx="1.5"/>
+                              </svg>
+                            ) : (
+                              /* Play */
+                              <svg width="13" height="14" viewBox="0 0 13 14" fill="white">
+                                <path d="M2 1.5 L12 7 L2 12.5 Z"/>
+                              </svg>
+                            )}
+                          </motion.div>
+                        </button>
+
+                        {/* Artist / Album — opens Spotify */}
+                        <a
+                          href={track.spotifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col gap-[2px] min-w-0"
+                        >
+                          <p className="font-medium text-[16px] leading-[24px] text-[#111] truncate">{track.artist}</p>
+                          <p className={`font-light text-[14px] leading-[17px] ${muted} truncate`}>{track.album}</p>
+                        </a>
                       </div>
-                      <div className="flex flex-col gap-[2px]">
-                        <p className="font-medium text-[16px] leading-[24px] text-[#111]">{track.artist}</p>
-                        <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{track.album}</p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ))}
             </div>
@@ -185,23 +343,7 @@ export default function AboutPage() {
 
         {/* ── Footer ── */}
         <FadeUp>
-          <div className="flex flex-col gap-4">
-            <div className="h-px w-full bg-black/10" />
-            <div className="flex items-center justify-between">
-              <p className={`font-light text-base leading-[22px] ${muted} opacity-80`}>vahlephic ⓒ 2026</p>
-              <div className="flex items-center gap-2">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full transition-transform duration-150 hover:scale-110 active:scale-95">
-                  <img src={A.instagram} alt="Instagram" className="size-5" />
-                </a>
-                <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full overflow-hidden transition-transform duration-150 hover:scale-110 active:scale-95">
-                  <img src={A.dribbble} alt="Dribbble" className="size-5" />
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full transition-transform duration-150 hover:scale-110 active:scale-95">
-                  <img src={A.linkedin} alt="LinkedIn" className="size-5" />
-                </a>
-              </div>
-            </div>
-          </div>
+          <Footer />
         </FadeUp>
 
       </div>

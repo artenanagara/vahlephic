@@ -7,7 +7,8 @@
     "period": "2025 - Now",
     "caseStudy": true,
     "liveUrl": "https://nyaritempat.com",
-    "appStores": []
+    "appStores": [],
+    "appStoreUrls": {}
   },
   {
     "slug": "kasheer",
@@ -16,8 +17,11 @@
     "description": "Efficient MSME POS & Management.",
     "period": "2023 - Now",
     "caseStudy": false,
-    "liveUrl": "#",
-    "appStores": ["googlePlay"]
+    "liveUrl": "https://kasheer.id",
+    "appStores": ["googlePlay"],
+    "appStoreUrls": {
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.kasheer&hl=en"
+    }
   },
   {
     "slug": "billing-rintisan",
@@ -26,7 +30,11 @@
     "description": "Integrated Invoicing App.",
     "period": "2022 - Now",
     "caseStudy": false,
-    "liveUrl": "#",
-    "appStores": ["googlePlay", "apple"]
+    "liveUrl": "https://rintisan.co.id",
+    "appStores": ["googlePlay", "apple"],
+    "appStoreUrls": {
+      "googlePlay": "https://play.google.com/store/apps/details?id=id.co.rintisan.billing&hl=en",
+      "apple": "https://apps.apple.com/id/app/rintisan-billing/id6745549559"
+    }
   }
 ]

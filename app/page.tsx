@@ -5,22 +5,16 @@ import projects from "@/data/projects.json";
 import { FadeUp }     from "@/app/components/FadeUp";
 import { TiltCard }   from "@/app/components/TiltCard";
 import { CharReveal } from "@/app/components/CharReveal";
+import { Footer }     from "@/app/components/Footer";
 
-// ─── Assets (expire 7 days from 2026-05-25) ───────────────────────────────────
+// ─── Assets ───────────────────────────────────────────────────────────────────
 const A = {
-  avatar:       "https://www.figma.com/api/mcp/asset/f6887da9-a0dd-4f1c-ac61-87b8c5aa845a",
-  kasheerMask:  "https://www.figma.com/api/mcp/asset/54f48593-3b62-40e4-8b68-9d745a267bf2",
-  billing:      "https://www.figma.com/api/mcp/asset/6de8833f-b187-498e-b35c-4eeef1a82c03",
-  nyari:        "https://www.figma.com/api/mcp/asset/4a850b92-e653-4349-8dac-bee84cf7e7e5",
-  moon:         "https://www.figma.com/api/mcp/asset/d695bfa2-6c2b-4e59-809c-686401735d29",
-  email:        "https://www.figma.com/api/mcp/asset/4f362378-a8e9-453e-a53b-6ceb2eeda9b1",
-  document:     "https://www.figma.com/api/mcp/asset/b3789615-96c0-4a29-ab34-ea9f04940012",
-  arrowUpRight: "https://www.figma.com/api/mcp/asset/51d30ff1-39bb-43c8-8bfc-644f7074874f",
-  googlePlay:   "https://www.figma.com/api/mcp/asset/83a3f6a1-9b94-444d-bd68-c14bc8ba0dbf",
-  apple:        "https://www.figma.com/api/mcp/asset/72569266-a697-46f9-aa2a-6438f641a1ef",
-  instagram:    "https://www.figma.com/api/mcp/asset/63485ff5-a47e-4cbd-b98f-fd08cecb5139",
-  dribbble:     "https://www.figma.com/api/mcp/asset/20a67230-424f-47cd-99bb-dc946e5a8ddb",
-  linkedin:     "https://www.figma.com/api/mcp/asset/42db4c6d-e6ee-4c6b-b5d3-97dd51bbbf33",
+  avatar:       "/Logo.png",
+  moon:         "/Moon Icon.svg",
+  document:     "/Document Icon.svg",
+  arrowUpRight: "/solar_arrow-right-up-linear.svg",
+  googlePlay:   "/playstore.svg",
+  apple:        "/appstore.svg",
 };
 
 // ─── Shared styles ────────────────────────────────────────────────────────────
@@ -103,42 +97,19 @@ function ProjectCard({
 // ─── Logo map (slug → JSX) ────────────────────────────────────────────────────
 const logoMap: Record<string, React.ReactNode> = {
   nyaritempat: (
-    <img src={A.nyari} alt="nyaritempat logo"
-         style={{ width: "78.022px", height: "28px" }}
-         className="block max-w-none" />
+    // SVG: original 78×28 — keep natural height
+    <img src="/works/nyaritempat/nyaritempat-logo.svg" alt="nyaritempat logo"
+         className="block" style={{ height: 28, width: "auto" }} />
   ),
   kasheer: (
-    <div
-      style={{
-        width: 118.125,
-        height: 21.375,
-        backgroundColor: "#714333",
-        maskImage: `url('${A.kasheerMask}')`,
-        WebkitMaskImage: `url('${A.kasheerMask}')`,
-        maskSize: "106.006px 18px",
-        WebkitMaskSize: "106.006px 18px",
-        maskPosition: "6.188px 1.688px",
-        WebkitMaskPosition: "6.188px 1.688px",
-        maskRepeat: "no-repeat",
-        WebkitMaskRepeat: "no-repeat",
-      }}
-    />
+    // PNG: 106×18 — scale to 24px tall, ~141px wide
+    <img src="/works/kasheer/kasheer-logo.png" alt="Kasheer logo"
+         className="block" style={{ height: 24, width: "auto" }} />
   ),
   "billing-rintisan": (
-    <div style={{ width: 28, height: 28, position: "relative", overflow: "hidden" }}>
-      <img
-        src={A.billing}
-        alt="Billing Rintisan logo"
-        style={{
-          position: "absolute",
-          width: "392.96%",
-          height: "392.96%",
-          left: "-51.67%",
-          top: "-146.73%",
-          maxWidth: "none",
-        }}
-      />
-    </div>
+    // PNG: 512×512 square icon — display at 44px
+    <img src="/works/rintisan/rintisan-logo.png" alt="Billing Rintisan logo"
+         className="block" style={{ height: 44, width: 44 }} />
   ),
 };
 
@@ -173,7 +144,7 @@ export default function HomePage() {
             <a href="/about" className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>About</a>
           </div>
           <div className="h-px w-full bg-black/10" />
-          <a href="#" className={`font-light text-[14px] leading-5 underline opacity-80 ${muted}`}>
+          <a href="https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={`font-light text-[14px] leading-5 underline opacity-80 ${muted}`}>
             Download CV
           </a>
         </motion.div>
@@ -200,7 +171,7 @@ export default function HomePage() {
                 transition={{ duration: 0.55, ease, delay: 0.52 }}
               >
                 <span className={`font-light ${muted}`}>Product Designer at </span>
-                <a href="#" className={`font-medium underline decoration-solid ${muted}`}>Rintisan</a>
+                <a href="https://rintisan.co.id" target="_blank" rel="noopener noreferrer" className={`font-medium underline decoration-solid ${muted}`}>Rintisan</a>
               </motion.p>
             </div>
 
@@ -228,7 +199,7 @@ export default function HomePage() {
                 Exploring many things while designing. Open for project
               </p>
               <div className="flex items-center gap-1">
-                <img src={A.email} alt="" className="size-4 shrink-0" />
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-70"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 <a href="mailto:vahlephic@gmail.com"
                    className={`font-medium text-base leading-[22px] ${muted} underline whitespace-nowrap`}>
                   vahlephic@gmail.com
@@ -281,13 +252,17 @@ export default function HomePage() {
                     )}
                     {project.appStores.length > 0 && (
                       <div className="flex items-center gap-2">
-                        <span className={`font-light text-[14px] leading-[17px] ${muted} underline whitespace-nowrap`}>Visit App:</span>
+                        <span className={`font-light text-[14px] leading-[17px] ${muted} whitespace-nowrap`}>Visit App:</span>
                         <div className="flex items-center gap-1">
                           {project.appStores.includes("googlePlay") && (
-                            <img src={A.googlePlay} alt="Google Play" className="size-5 opacity-80" />
+                            <a href={project.appStoreUrls?.googlePlay} target="_blank" rel="noopener noreferrer" className="transition-transform duration-150 hover:scale-110 active:scale-95">
+                              <img src={A.googlePlay} alt="Google Play" className="size-5" />
+                            </a>
                           )}
                           {project.appStores.includes("apple") && (
-                            <img src={A.apple} alt="App Store" className="size-5 opacity-80" />
+                            <a href={project.appStoreUrls?.apple} target="_blank" rel="noopener noreferrer" className="transition-transform duration-150 hover:scale-110 active:scale-95">
+                              <img src={A.apple} alt="App Store" className="size-5" />
+                            </a>
                           )}
                         </div>
                       </div>
@@ -301,26 +276,7 @@ export default function HomePage() {
 
         {/* Footer */}
         <FadeUp>
-          <div className="flex flex-col gap-4">
-            <div className="h-px w-full bg-black/10" />
-            <div className="flex items-center justify-between">
-              <p className={`font-light text-base leading-[22px] ${muted} opacity-80`}>vahlephic ⓒ 2026</p>
-              <div className="flex items-center gap-2">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                   className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full transition-transform duration-150 hover:scale-110 active:scale-95">
-                  <img src={A.instagram} alt="Instagram" className="size-5" />
-                </a>
-                <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer"
-                   className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full overflow-hidden transition-transform duration-150 hover:scale-110 active:scale-95">
-                  <img src={A.dribbble} alt="Dribbble" className="size-5" />
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                   className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full transition-transform duration-150 hover:scale-110 active:scale-95">
-                  <img src={A.linkedin} alt="LinkedIn" className="size-5" />
-                </a>
-              </div>
-            </div>
-          </div>
+          <Footer />
         </FadeUp>
       </div>
     </div>

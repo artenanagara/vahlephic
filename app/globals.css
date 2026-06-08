@@ -61,3 +61,12 @@ body {
   margin: -26px 0 0 -26px;
   border-color: rgba(17, 17, 17, 0.1);
 }
+
+/* ── Hide Spotify player visually — must stay IN viewport for audio to work ─ */
+#sp-player,
+#sp-player iframe,
+iframe[src*="open.spotify.com"],
+iframe[src*="spotify.com/embed"] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
