@@ -1,11 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import projects from "@/data/projects.json";
+import Link from "next/link";
+import projectsData from "@/data/projects.json";
 import { FadeUp }     from "@/app/components/FadeUp";
 import { TiltCard }   from "@/app/components/TiltCard";
 import { CharReveal } from "@/app/components/CharReveal";
 import { Footer }     from "@/app/components/Footer";
+
+type AppStore = "googlePlay" | "apple";
+
+interface Project {
+  slug: string;
+  num: string;
+  title: string;
+  description: string;
+  period: string;
+  caseStudy: boolean;
+  liveUrl?: string;
+  appStores: AppStore[];
+  appStoreUrls?: Partial<Record<AppStore, string>>;
+}
+
+const projects = projectsData as Project[];
 
 // ─── Assets ───────────────────────────────────────────────────────────────────
 const A = {
@@ -63,10 +80,10 @@ function ProjectCard({
           {caseStudy && slug && (
             <>
               <div className="w-px h-[18px] bg-black/20" />
-              <a href={`/work/${slug}`} className={`group/cs flex items-center gap-2 font-light text-base leading-[22px] ${muted} underline whitespace-nowrap`}>
+              <Link href={`/work/${slug}`} className={`group/cs flex items-center gap-2 font-light text-base leading-[22px] ${muted} underline whitespace-nowrap`}>
                 Read case study
                 <img src={A.document} alt="" className="size-5 transition-transform duration-150 group-hover/cs:translate-x-[2px]" />
-              </a>
+              </Link>
             </>
           )}
         </div>
@@ -140,8 +157,8 @@ export default function HomePage() {
         >
           <div className="flex flex-col gap-[6px] text-[14px]">
             <p className="font-semibold text-[#111] leading-5">Home</p>
-            <a href="/work"  className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Work</a>
-            <a href="/about" className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>About</a>
+            <Link href="/work"  className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Work</Link>
+            <Link href="/about" className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>About</Link>
           </div>
           <div className="h-px w-full bg-black/10" />
           <a href="https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={`font-light text-[14px] leading-5 underline opacity-80 ${muted}`}>
@@ -152,7 +169,7 @@ export default function HomePage() {
 
       {/* ── Scrollable content ── */}
       <div
-        className="pt-[200px] pb-20 flex flex-col gap-[80px]"
+        className="pt-[136px] pb-20 flex flex-col gap-[80px]"
         style={{ marginLeft: "calc(25% + 110px)", width: 500 }}
       >
         {/* ── Author ── */}

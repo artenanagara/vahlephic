@@ -20,7 +20,7 @@ export function CharReveal({ text, className, startDelay = 0, charDelay = 0.024 
 
   return (
     <span className={className}>
-      {words.map(({ word, chars }, wi) => (
+      {words.map(({ chars }, wi) => (
         <Fragment key={wi}>
           {/* overflow:hidden creates the "wipe from below" mask */}
           <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom", lineHeight: "1.2" }}>

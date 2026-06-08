@@ -1,5 +1,5 @@
 "use client";
-import { useRef, MouseEvent, ReactNode, useCallback } from "react";
+import { useRef, MouseEvent, ReactNode, useEffect } from "react";
 
 interface Props {
   children: ReactNode;
@@ -15,7 +15,7 @@ export function TiltCard({ children, className = "", intensity = 7 }: Props) {
 
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-  const loop = useCallback(() => {
+  function loop() {
     cx.current = lerp(cx.current, tx.current, 0.09);
     cy.current = lerp(cy.current, ty.current, 0.09);
     cz.current = lerp(cz.current, tz.current, 0.09);
@@ -31,6 +31,12 @@ export function TiltCard({ children, className = "", intensity = 7 }: Props) {
       Math.abs(cz.current - tz.current) > 0.05;
 
     rafRef.current = stillMoving ? requestAnimationFrame(loop) : null;
+  }
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   const onMove = (e: MouseEvent<HTMLDivElement>) => {

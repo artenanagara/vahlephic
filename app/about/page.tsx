@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 import aboutData from "@/data/about.json";
 import { FadeUp }     from "@/app/components/FadeUp";
@@ -15,6 +16,33 @@ const A = {
 
 const muted = "text-[rgba(17,17,17,0.8)]";
 const ease  = [0.22, 1, 0.36, 1] as const;
+
+interface SpotifyPlaybackUpdate {
+  data?: {
+    isPaused?: boolean;
+  };
+}
+
+interface SpotifyEmbedController {
+  addListener(event: "playback_update", callback: (event: SpotifyPlaybackUpdate) => void): void;
+  loadUri(uri: string): void;
+  pause(): void;
+  play(): void;
+}
+
+interface SpotifyIframeApi {
+  createController(
+    element: HTMLElement,
+    options: { uri: string; width: string; height: string },
+    callback: (controller: SpotifyEmbedController) => void
+  ): void;
+}
+
+declare global {
+  interface Window {
+    onSpotifyIframeApiReady?: (api: SpotifyIframeApi) => void;
+  }
+}
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 function SectionHeader({ title }: { title: string }) {
@@ -36,7 +64,7 @@ function LogoBox({ src, alt, rounded = "rounded-[10.75px]" }: { src: string | nu
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function AboutPage() {
   // ── Spotify player state ──
-  const spotifyCtrl  = useRef<any>(null);
+  const spotifyCtrl  = useRef<SpotifyEmbedController | null>(null);
   const [playerReady, setPlayerReady]   = useState(false);
   const [playingId,   setPlayingId]     = useState<string | null>(null);
   const [visibleId,   setVisibleId]     = useState<string | null>(null);
@@ -67,28 +95,28 @@ export default function AboutPage() {
     });
     observer.observe(document.body, { childList: true, subtree: true });
 
-    const setup = (IFrameAPI: any) => {
+    const setup = (IFrameAPI: SpotifyIframeApi) => {
       const el = document.getElementById("sp-player");
       if (!el) return;
       IFrameAPI.createController(
         el,
         { uri: "spotify:track:76DzFyYlkByQMN4VXK7ynB", width: "300", height: "80" },
-        (ctrl: any) => {
+        (ctrl) => {
           spotifyCtrl.current = ctrl;
           setPlayerReady(true);
           // Hide the created iframe immediately
           el.querySelectorAll("iframe").forEach(hideSpotifyEl);
-          ctrl.addListener("playback_update", (e: any) => {
+          ctrl.addListener("playback_update", (e) => {
             if (e?.data?.isPaused) setPlayingId(null);
           });
         }
       );
     };
 
-    if ((window as any).onSpotifyIframeApiReady) {
+    if (window.onSpotifyIframeApiReady) {
       // Already loaded — re-use
     } else {
-      (window as any).onSpotifyIframeApiReady = setup;
+      window.onSpotifyIframeApiReady = setup;
       if (!document.getElementById("spotify-api-script")) {
         const s = document.createElement("script");
         s.id  = "spotify-api-script";
@@ -171,8 +199,8 @@ export default function AboutPage() {
           transition={{ duration: 0.55, ease, delay: 0.1 }}
         >
           <div className="flex flex-col gap-[6px] text-[14px]">
-            <a href="/"     className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Home</a>
-            <a href="/work" className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Work</a>
+            <Link href="/"     className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Home</Link>
+            <Link href="/work" className={`font-light leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}>Work</Link>
             <p className="font-semibold text-[#111] leading-5">About</p>
           </div>
           <div className="h-px w-full bg-black/10" />
@@ -181,7 +209,7 @@ export default function AboutPage() {
       </nav>
 
       {/* ── Scrollable content ── */}
-      <div className="pt-[200px] pb-20 flex flex-col gap-[80px]" style={{ marginLeft: "calc(25% + 110px)", width: 500 }}>
+      <div className="pt-[136px] pb-20 flex flex-col gap-[80px]" style={{ marginLeft: "calc(25% + 110px)", width: 500 }}>
 
         {/* ── Bio ── */}
         <div className="flex flex-col gap-6">
