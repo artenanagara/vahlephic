@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import fs   from "fs";
 import path from "path";
 import { Footer } from "@/app/components/Footer";
+import { muted, cardShadow } from "@/app/lib/constants";
 import SidebarNav      from "./SidebarNav";
 import { RevealSection } from "./RevealSection";
 
@@ -14,7 +16,7 @@ interface BeforeAfter {
 interface ImageGroup {
   label?: string;
   images: string[];
-  layout?: "row" | "grid"; // "row" = single flex row, "grid" = 2-col (default)
+  layout?: "row" | "grid";
 }
 
 interface BeforeAfterFlow {
@@ -37,16 +39,16 @@ interface FlowDiagram {
 interface WorkSection {
   id: string;
   title: string;
-  body?:           string[];   // paragraphs before main content
-  image?:          string;     // single full-width image
-  bodyAfterImage?: string[];   // paragraphs after single image
+  body?:           string[];
+  image?:          string;
+  bodyAfterImage?: string[];
   beforeAfter?:    BeforeAfter;
   groups?:         ImageGroup[];
   intro?:          string;
   screens?:        Screen[];
-  flow?:            FlowDiagram;      // user-flow snake diagram
-  beforeAfterFlow?: BeforeAfterFlow;  // before (snake) + after (linear blue) flows
-  card?:            boolean;          // render section inside #F8F8F8 card
+  flow?:            FlowDiagram;
+  beforeAfterFlow?: BeforeAfterFlow;
+  card?:            boolean;
 }
 
 interface WorkMeta {
@@ -85,14 +87,8 @@ export async function generateStaticParams() {
   return getWorkSlugs().map((slug) => ({ slug }));
 }
 
-// ─── Shared styles (mirrors main page) ────────────────────────────────────────
-const cardShadow =
-  "shadow-[0px_10px_10px_-6px_rgba(0,0,0,0.01),0px_4px_10px_-5px_rgba(35,54,55,0.24),0px_0px_0px_1px_#e5e5e5]";
-const muted = "text-[rgba(17,17,17,0.8)]";
-
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-/** Renders an HTML-safe paragraph that supports <strong> tags in JSON */
 function Para({ text }: { text: string }) {
   return (
     <p
@@ -102,7 +98,6 @@ function Para({ text }: { text: string }) {
   );
 }
 
-/** Full-width image with card shadow */
 function ContentImage({ src, alt }: { src: string; alt?: string }) {
   return (
     <div className={`w-full rounded-[10px] overflow-hidden transition-transform duration-200 hover:-translate-y-[2px] ${cardShadow}`}>
@@ -112,15 +107,12 @@ function ContentImage({ src, alt }: { src: string; alt?: string }) {
   );
 }
 
-/** Before / After comparison layout */
 function BeforeAfterSection({ data }: { data: BeforeAfter }) {
   return (
     <div className="flex flex-col gap-3 w-full">
       {(["before", "after"] as const).map((key) => (
         <div key={key} className="flex flex-col gap-2">
-          <p className={`font-medium text-sm leading-[18px] ${muted}`}>
-            {data[key].label}
-          </p>
+          <p className={`font-medium text-sm leading-[18px] ${muted}`}>{data[key].label}</p>
           <ContentImage src={data[key].image} alt={data[key].label} />
         </div>
       ))}
@@ -128,45 +120,29 @@ function BeforeAfterSection({ data }: { data: BeforeAfter }) {
   );
 }
 
-/** Labeled image groups — "row" = equal-flex row, "grid" = 2-col wrap */
 function ImageGroups({ groups }: { groups: ImageGroup[] }) {
   return (
     <div className="flex flex-col gap-6">
       {groups.map((group, gi) => (
         <div key={gi} className="flex flex-col gap-4">
           {group.label && (
-            <p className={`font-light text-[16px] leading-[20px] ${muted}`}>
-              {group.label}
-            </p>
+            <p className={`font-light text-[16px] leading-[20px] ${muted}`}>{group.label}</p>
           )}
           {group.layout === "row" ? (
-            /* Single flex row — all images equal width */
             <div className="flex snap-x items-stretch gap-[10px] overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
               {group.images.map((img, ii) => (
                 <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-[6px] sm:min-w-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={img}
-                    alt={`${group.label ?? "reference"} ${ii + 1}`}
-                    className="w-full h-full object-cover block"
-                  />
+                  <img src={img} alt={`${group.label ?? "reference"} ${ii + 1}`} className="w-full h-full object-cover block" />
                 </div>
               ))}
             </div>
           ) : (
-            /* 2-column grid with shadow */
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {group.images.map((img, ii) => (
-                <div
-                  key={ii}
-                  className={`rounded-[8px] overflow-hidden ${cardShadow}`}
-                >
+                <div key={ii} className={`rounded-[8px] overflow-hidden ${cardShadow}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={img}
-                    alt={`${group.label ?? "reference"} ${ii + 1}`}
-                    className="w-full h-auto block"
-                  />
+                  <img src={img} alt={`${group.label ?? "reference"} ${ii + 1}`} className="w-full h-auto block" />
                 </div>
               ))}
             </div>
@@ -177,24 +153,17 @@ function ImageGroups({ groups }: { groups: ImageGroup[] }) {
   );
 }
 
-/** Labeled outcome screen groups */
 function OutcomeScreens({ screens }: { screens: Screen[] }) {
   return (
     <div className="flex flex-col gap-4">
       {screens.map((screen, si) => (
         <div key={si} className="w-full rounded-[20px] bg-[#F8F8F8] border border-[#E9E9E9] p-4 flex flex-col gap-3">
-          <p className={`font-light text-[16px] leading-[20px] ${muted}`}>
-            {screen.label}
-          </p>
+          <p className={`font-light text-[16px] leading-[20px] ${muted}`}>{screen.label}</p>
           <div className="flex snap-x items-stretch gap-[10px] overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
             {screen.images.map((img, ii) => (
               <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-[6px] sm:min-w-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img}
-                  alt={`${screen.label} ${ii + 1}`}
-                  className="w-full h-auto block"
-                />
+                <img src={img} alt={`${screen.label} ${ii + 1}`} className="w-full h-auto block" />
               </div>
             ))}
           </div>
@@ -204,7 +173,6 @@ function OutcomeScreens({ screens }: { screens: Screen[] }) {
   );
 }
 
-/** Arrow from public/arrow.svg — rotate for direction */
 function Arrow({ dir }: { dir: "right" | "left" | "down" }) {
   const rotate = { right: "0deg", left: "180deg", down: "90deg" };
   return (
@@ -218,19 +186,22 @@ function Arrow({ dir }: { dir: "right" | "left" | "down" }) {
   );
 }
 
-/** A single step card in the flow */
-function FlowCard({ text }: { text: string }) {
+const flowCardShell: React.CSSProperties = {
+  height: 88,
+  background: "linear-gradient(180deg, white 0%, #FBFBFB 81%, #F6F6F6 100%)",
+  boxShadow:
+    "0px 0px 0px 1px #E5E5E5, 0px 4px 10px -5px rgba(35,54,55,0.24), inset 0px 0px 0px 2px white, 0px 10px 10px -6px rgba(0,0,0,0.01)",
+};
+
+function FlowCard({ text, blue = false }: { text: string; blue?: boolean }) {
   return (
     <div
       className="flow-card-shell flex min-w-[120px] flex-1 overflow-hidden rounded-[12px] p-[6px] pt-[11px] sm:min-w-0"
-      style={{
-        height: 88,
-        background: "linear-gradient(180deg, white 0%, #FBFBFB 81%, #F6F6F6 100%)",
-        boxShadow:
-          "0px 0px 0px 1px #E5E5E5, 0px 4px 10px -5px rgba(35,54,55,0.24), inset 0px 0px 0px 2px white, 0px 10px 10px -6px rgba(0,0,0,0.01)",
-      }}
+      style={flowCardShell}
     >
-      <div className="flow-card-inner flex-1 bg-[#F6F6F6] rounded-[8px] border-[0.5px] border-[#E7E7E7] overflow-hidden flex items-center justify-center p-2">
+      <div
+        className={`flow-card-inner flex-1 rounded-[8px] border-[0.5px] border-[#E7E7E7] overflow-hidden flex items-center justify-center p-2 ${blue ? "flow-card-inner--after bg-[#F0F9FE]" : "bg-[#F6F6F6]"}`}
+      >
         <p className="text-center text-[11.7px] font-normal leading-[1.4] text-[#4F4F4F]">
           {text}
         </p>
@@ -242,95 +213,68 @@ function FlowCard({ text }: { text: string }) {
 /** 2-row snake flow: row1 L→R, row2 R→L */
 function ProblemFlow({ label, steps }: { label?: string; steps: string[] }) {
   const row1 = steps.slice(0, 3);
-  // row2 displayed L→R as [step6, step5, step4] so arrows point ←
   const row2 = [steps[5], steps[4], steps[3]];
 
   return (
     <div className="flex flex-col items-center gap-3 w-full">
       {label && (
-        <p className="font-light text-[16px] leading-[24px] text-[rgba(17,17,17,0.8)]">
-          {label}
-        </p>
+        <p className={`font-light text-[16px] leading-[24px] ${muted}`}>{label}</p>
       )}
       <div className="w-full overflow-x-auto pb-1">
         <div className="flex min-w-[500px] flex-col items-end gap-2 sm:min-w-0">
-        {/* Row 1: left → right */}
-        <div className="w-full flex items-center gap-[6px]">
-          {row1.map((text, i) => (
-            <div key={i} className="contents">
-              <FlowCard text={text} />
-              {i < 2 && <Arrow dir="right" />}
-            </div>
-          ))}
-        </div>
-
-        {/* ↓ arrow — centered above rightmost column */}
-        <div className="w-full flex justify-end">
-          <div
-            className="flex items-center justify-center"
-            style={{ width: "calc((100% - 40px) / 3)" }}
-          >
-            <Arrow dir="down" />
+          <div className="w-full flex items-center gap-[6px]">
+            {row1.map((text, i) => (
+              <div key={i} className="contents">
+                <FlowCard text={text} />
+                {i < 2 && <Arrow dir="right" />}
+              </div>
+            ))}
           </div>
-        </div>
 
-        {/* Row 2: right → left flow (visit ← get choice ← keep searching) */}
-        <div className="w-full flex items-center gap-[6px]">
-          {row2.map((text, i) => (
-            <div key={i} className="contents">
-              <FlowCard text={text} />
-              {i < 2 && <Arrow dir="left" />}
+          <div className="w-full flex justify-end">
+            <div
+              className="flex items-center justify-center"
+              style={{ width: "calc((100% - 40px) / 3)" }}
+            >
+              <Arrow dir="down" />
             </div>
-          ))}
-        </div>
+          </div>
+
+          <div className="w-full flex items-center gap-[6px]">
+            {row2.map((text, i) => (
+              <div key={i} className="contents">
+                <FlowCard text={text} />
+                {i < 2 && <Arrow dir="left" />}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-/** Single-row linear flow with blue (#F0F9FE) inner cards — "After" variant */
+/** Single-row linear flow with blue inner cards — "After" variant */
 function AfterFlow({ label, steps }: { label?: string; steps: string[] }) {
   return (
     <div className="flex flex-col items-center gap-3 w-full">
       {label && (
-        <p className="font-light text-[16px] leading-[24px] text-[rgba(17,17,17,0.8)]">
-          {label}
-        </p>
+        <p className={`font-light text-[16px] leading-[24px] ${muted}`}>{label}</p>
       )}
       <div className="w-full overflow-x-auto pb-1">
         <div className="flex min-w-[500px] items-center gap-[6px] sm:min-w-0">
-        {steps.map((text, i) => (
-          <div key={i} className="contents">
-            <div
-              className="flow-card-shell flex-1 overflow-hidden rounded-[12px] flex"
-              style={{
-                height: 88,
-                paddingTop: 11.7,
-                paddingLeft: 6.13,
-                paddingRight: 6.13,
-                paddingBottom: 6.13,
-                background: "linear-gradient(180deg, white 0%, #FBFBFB 81%, #F6F6F6 100%)",
-                boxShadow:
-                  "0px 0px 0px 1px #E5E5E5, 0px 4px 10px -5px rgba(35,54,55,0.24), inset 0px 0px 0px 2px white, 0px 10px 10px -6px rgba(0,0,0,0.01)",
-              }}
-            >
-              <div className="flow-card-inner flow-card-inner--after flex-1 bg-[#F0F9FE] rounded-[8px] border-[0.5px] border-[#E7E7E7] flex items-center justify-center p-2">
-                <p className="text-center text-[11.7px] font-normal leading-[1.4] text-[#4F4F4F]">
-                  {text}
-                </p>
-              </div>
+          {steps.map((text, i) => (
+            <div key={i} className="contents">
+              <FlowCard text={text} blue />
+              {i < steps.length - 1 && <Arrow dir="right" />}
             </div>
-            {i < steps.length - 1 && <Arrow dir="right" />}
-          </div>
-        ))}
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-/** A single case-study section */
 function CaseSection({ section }: { section: WorkSection }) {
   const bodyBefore = section.body ? (
     <div className="flex flex-col gap-3">
@@ -344,14 +288,11 @@ function CaseSection({ section }: { section: WorkSection }) {
     </div>
   ) : null;
 
-  /* ── Card variant (e.g. Reference) ── */
   if (section.card) {
     return (
       <div id={section.id} className="flex flex-col gap-5">
         <div className="w-full rounded-[16px] bg-[#F8F8F8] border border-[#E9E9E9] p-4 flex flex-col gap-4 sm:rounded-[20px]">
-          <p className="font-semibold text-[16px] leading-[24px] text-[#111]">
-            {section.title}
-          </p>
+          <p className="font-semibold text-[16px] leading-[24px] text-[#111]">{section.title}</p>
           {bodyBefore}
           {section.groups && <ImageGroups groups={section.groups} />}
         </div>
@@ -360,28 +301,20 @@ function CaseSection({ section }: { section: WorkSection }) {
     );
   }
 
-  /* ── Standard variant ── */
   return (
     <div id={section.id} className="flex flex-col gap-5">
-      {/* Heading + divider */}
       <div className="flex flex-col gap-2">
-        <p className="font-semibold text-xl leading-[28px] text-[#111]">
-          {section.title}
-        </p>
+        <p className="font-semibold text-xl leading-[28px] text-[#111]">{section.title}</p>
         <div className="h-px w-full bg-black/10" />
       </div>
 
       {bodyBefore}
-
-      {/* Single image */}
       {section.image && <ContentImage src={section.image} />}
 
-      {/* Snake flow (Problem) */}
       {section.flow && (
         <ProblemFlow label={section.flow.label} steps={section.flow.steps} />
       )}
 
-      {/* Before + After flows (Solution) */}
       {section.beforeAfterFlow && (
         <div className="w-full flex flex-col items-center gap-8">
           <ProblemFlow
@@ -395,13 +328,8 @@ function CaseSection({ section }: { section: WorkSection }) {
         </div>
       )}
 
-      {/* Before / After images */}
       {section.beforeAfter && <BeforeAfterSection data={section.beforeAfter} />}
-
-      {/* Image groups (non-card) */}
       {section.groups && <ImageGroups groups={section.groups} />}
-
-      {/* Outcome intro + screens */}
       {section.intro && <Para text={section.intro} />}
       {section.screens && <OutcomeScreens screens={section.screens} />}
 
@@ -419,12 +347,8 @@ export default async function WorkDetailPage({
   const { slug } = await params;
   const work = getWorkData(slug);
   if (!work) notFound();
-  const Link = (await import("next/link")).default;
 
-  const sectionNavItems = work.sections.map((s) => ({
-    id: s.id,
-    title: s.title,
-  }));
+  const sectionNavItems = work.sections.map((s) => ({ id: s.id, title: s.title }));
 
   return (
     <div className="bg-[#fafafa] min-h-screen">
@@ -433,7 +357,6 @@ export default async function WorkDetailPage({
       <nav
         className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-[620px] items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-[200px] lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none"
       >
-        {/* Project icon */}
         {work.logo ? (
           <div className="shrink-0 inline-flex">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -448,19 +371,14 @@ export default async function WorkDetailPage({
           </div>
         )}
 
-        {/* Navigation */}
         <div className="flex min-w-0 items-center gap-4 lg:flex-col lg:items-start">
-          {/* Back link */}
           <Link
             href="/"
             className={`flex shrink-0 items-center gap-1 font-light text-[14px] leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}
           >
             ← Back
           </Link>
-
           <div className="hidden h-px w-full bg-black/10 lg:block" />
-
-          {/* Section anchors — active state tracked client-side */}
           <div className="hidden lg:block">
             <SidebarNav items={sectionNavItems} />
           </div>
@@ -468,55 +386,37 @@ export default async function WorkDetailPage({
       </nav>
 
       {/* ── Scrollable content ── */}
-      <div
-        className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[60px] lg:px-0 lg:pt-[200px]"
-      >
+      <div className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[60px] lg:px-0 lg:pt-[200px]">
+
         {/* ── Header ── */}
         <div className="flex flex-col gap-5" style={{ animation: "fadeUp 0.72s cubic-bezier(0.22,1,0.36,1) backwards" }}>
-          {/* Title + description */}
           <div className="flex flex-col gap-3">
             <p className="font-semibold text-[26px] leading-[34px] text-[#111] sm:text-[28px] sm:leading-[38px]">
               {work.title}
             </p>
-            <p className={`font-light text-base leading-[22px] ${muted}`}>
-              {work.description}
-            </p>
+            <p className={`font-light text-base leading-[22px] ${muted}`}>{work.description}</p>
           </div>
 
-          {/* Meta + Hero — outer container: #F8F8F8, rounded-[20px], border */}
           <div className="w-full rounded-[16px] bg-[#F8F8F8] border border-[#E9E9E9] p-[6px] pb-3 flex flex-col gap-3 sm:rounded-[20px]">
-
-            {/* Inner white card */}
             <div className="w-full bg-white rounded-[16px] border border-[#E9E9E9] p-[6px]">
-              {/* Meta row: #FBFBFB bg, border #F0F0F0, rounded-[12px] */}
               <div className="w-full bg-[#FBFBFB] rounded-[12px] border border-[#F0F0F0] p-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                {/* Left: Role + Timeline */}
                 <div className="grid w-full grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:w-auto sm:flex sm:items-center sm:gap-8">
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-medium text-[16px] leading-[22px] text-[rgba(17,17,17,0.8)]">
-                      Role
-                    </p>
-                    <p className="font-light text-[14px] leading-[17px] text-[rgba(17,17,17,0.8)]">
-                      {work.meta.role}
-                    </p>
+                    <p className={`font-medium text-[16px] leading-[22px] ${muted}`}>Role</p>
+                    <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{work.meta.role}</p>
                   </div>
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-medium text-[16px] leading-[22px] text-[rgba(17,17,17,0.8)]">
-                      Timeline
-                    </p>
-                    <p className="font-light text-[14px] leading-[17px] text-[rgba(17,17,17,0.8)]">
-                      {work.meta.timeline}
-                    </p>
+                    <p className={`font-medium text-[16px] leading-[22px] ${muted}`}>Timeline</p>
+                    <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{work.meta.timeline}</p>
                   </div>
                 </div>
 
-                {/* Right: Visit website */}
                 {work.meta.liveUrl && (
                   <a
                     href={work.meta.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/visit flex items-center gap-[5px] font-light text-[14px] leading-[17px] text-[rgba(17,17,17,0.8)] underline"
+                    className={`group/visit flex items-center gap-[5px] font-light text-[14px] leading-[17px] ${muted} underline`}
                   >
                     Visit website
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(17,17,17,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-150 group-hover/visit:translate-x-[2px] group-hover/visit:-translate-y-[2px]">
@@ -527,7 +427,6 @@ export default async function WorkDetailPage({
               </div>
             </div>
 
-            {/* Hero image — centered, padded on sides + bottom */}
             {work.hero && (
               <div className="w-full px-4 pb-4 flex justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -544,7 +443,6 @@ export default async function WorkDetailPage({
           </RevealSection>
         ))}
 
-        {/* ── Footer ── */}
         <RevealSection>
           <Footer />
         </RevealSection>

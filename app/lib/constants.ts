@@ -1,0 +1,19 @@
+export const muted = "text-[rgba(17,17,17,0.8)]";
+export const ease = [0.22, 1, 0.36, 1] as const;
+
+export const cardShadow =
+  "shadow-[0px_10px_10px_-6px_rgba(0,0,0,0.01),0px_4px_10px_-5px_rgba(35,54,55,0.24),0px_0px_0px_1px_#e5e5e5]";
+export const innerShadow = "shadow-[inset_0px_0px_0px_2px_white]";
+export const cardGradient =
+  "bg-gradient-to-b from-white via-[#fbfbfb] to-[#f6f6f6] via-[81%]";
+
+export const ASSETS = {
+  avatar:       "/Logo.png",
+  document:     "/Document Icon.svg",
+  arrowUpRight: "/solar_arrow-right-up-linear.svg",
+  googlePlay:   "/playstore.svg",
+  apple:        "/appstore.svg",
+} as const;
+
+export const CV_URL =
+  "https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing";

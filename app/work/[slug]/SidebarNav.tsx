@@ -7,7 +7,7 @@ interface NavItem {
   title: string;
 }
 
-const muted = "text-[rgba(17,17,17,0.8)]";
+import { muted } from "@/app/lib/constants";
 
 export default function SidebarNav({ items }: { items: NavItem[] }) {
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");

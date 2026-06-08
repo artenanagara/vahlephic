@@ -1,4 +1,4 @@
-const muted = "text-[rgba(17,17,17,0.8)]";
+import { muted } from "@/app/lib/constants";
 
 export function Footer() {
   return (
