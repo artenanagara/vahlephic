@@ -189,8 +189,8 @@ html[data-theme="dark"] .theme-store-icon {
   filter: grayscale(1) brightness(0) invert(1);
 }
 
-html[data-theme="dark"] img[src*="Document Icon"],
-html[data-theme="dark"] img[src*="solar_arrow"],
+html[data-theme="dark"] img[src*="document"],
+html[data-theme="dark"] img[src*="arrow-up-right"],
 html[data-theme="dark"] img[src*="arrow.svg"],
 html[data-theme="dark"] img[src*="playstore"],
 html[data-theme="dark"] img[src*="appstore"],
