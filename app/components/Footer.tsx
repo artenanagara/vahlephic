@@ -12,11 +12,11 @@ export function Footer() {
         <div className="flex items-center gap-2">
           <a href="https://www.instagram.com/vahlephic/" target="_blank" rel="noopener noreferrer"
              className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full transition-transform duration-150 hover:scale-110 active:scale-95">
-            <img src="/Instagram Icon.png" alt="Instagram" className="theme-icon size-5 object-contain" />
+            <img src="/icons/instagram.png" alt="Instagram" className="theme-icon size-5 object-contain" />
           </a>
           <a href="https://dribbble.com/vahlephic" target="_blank" rel="noopener noreferrer"
              className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full overflow-hidden transition-transform duration-150 hover:scale-110 active:scale-95">
-            <img src="/Dribbble Icon.png" alt="Dribbble" className="theme-icon size-5 object-contain" />
+            <img src="/icons/dribbble.png" alt="Dribbble" className="theme-icon size-5 object-contain" />
           </a>
           <a href="https://www.linkedin.com/in/rizalvahlevi/" target="_blank" rel="noopener noreferrer"
              className="bg-[rgba(43,43,43,0.05)] p-[5px] rounded-full transition-transform duration-150 hover:scale-110 active:scale-95">

@@ -178,7 +178,7 @@ function Arrow({ dir }: { dir: "right" | "left" | "down" }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/arrow.svg"
+      src="/icons/arrow.svg"
       alt=""
       className="shrink-0"
       style={{ transform: `rotate(${rotate[dir]})`, width: 8, height: 7, display: "block" }}

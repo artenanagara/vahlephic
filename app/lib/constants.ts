@@ -8,11 +8,11 @@ export const cardGradient =
   "bg-gradient-to-b from-white via-[#fbfbfb] to-[#f6f6f6] via-[81%]";
 
 export const ASSETS = {
-  avatar:       "/Logo.png",
-  document:     "/Document Icon.svg",
-  arrowUpRight: "/solar_arrow-right-up-linear.svg",
-  googlePlay:   "/playstore.svg",
-  apple:        "/appstore.svg",
+  avatar:       "/images/avatar.png",
+  document:     "/icons/document.svg",
+  arrowUpRight: "/icons/arrow-up-right.svg",
+  googlePlay:   "/icons/playstore.svg",
+  apple:        "/icons/appstore.svg",
 } as const;
 
 export const CV_URL =

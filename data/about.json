@@ -8,21 +8,21 @@
         "company": "PT. Rintisan Teknologi Waralaba",
         "type": "Fulltime",
         "period": "2022 - Now",
-        "logo": "/works/experience/Logo.png"
+        "logo": "/images/companies/rintisan.png"
       },
       {
         "role": "UI/UX Designer",
         "company": "PT. Arkatama Multi Solusindo",
         "type": "Intern",
         "period": "2022 - 2022",
-        "logo": "/works/experience/Logo-1.png"
+        "logo": "/images/companies/arkatama.png"
       },
       {
         "role": "UI/UX Designer",
         "company": "Skilvul",
         "type": "Intern",
         "period": "2021 - 2021",
-        "logo": "/works/experience/Logo-2.png"
+        "logo": "/images/companies/skilvul.png"
       }
     ]
   },
@@ -31,15 +31,15 @@
       "institution": "University of Singaperbangsa Karawang",
       "degree": "Bachelor's degree, Computer Science. GPA: 3.82",
       "period": "2018 - 2022",
-      "logo": "/works/experience/Logo-3.png"
+      "logo": "/images/companies/unsika.png"
     }
   ],
   "listening": [
-    { "artist": "Perunggu",      "album": "Dalam Dinamika",        "cover": "/song/Perunggu 1.png",     "spotifyUrl": "https://open.spotify.com/album/1Mhq1R6xMuXuWUgbl6B6Iv", "spotifyEmbed": "album/1Mhq1R6xMuXuWUgbl6B6Iv" },
-    { "artist": "Perunggu",      "album": "Memorandum",            "cover": "/song/Perunggu 2.png",     "spotifyUrl": "https://open.spotify.com/album/2ZI3XeIrCM1PsOtK3rlMth", "spotifyEmbed": "album/2ZI3XeIrCM1PsOtK3rlMth" },
-    { "artist": "Pamungkas",     "album": "Walk The Talk",         "cover": "/song/Pamungkas.png",      "spotifyUrl": "https://open.spotify.com/track/76DzFyYlkByQMN4VXK7ynB",  "spotifyEmbed": "track/76DzFyYlkByQMN4VXK7ynB" },
-    { "artist": "Adele",         "album": "25",                    "cover": "/song/Adele.png",          "spotifyUrl": "https://open.spotify.com/album/3AvPX1B1HiFROvYjLb5Qwi",  "spotifyEmbed": "album/3AvPX1B1HiFROvYjLb5Qwi" },
-    { "artist": "Justin Bieber", "album": "My World",              "cover": "/song/Justin Bieber.png",  "spotifyUrl": "https://open.spotify.com/album/1rG5TDs3jYh6OU753I54CI",  "spotifyEmbed": "album/1rG5TDs3jYh6OU753I54CI" },
-    { "artist": "Hindia",        "album": "Menari Dalam Bayangan", "cover": "/song/Hindia.png",         "spotifyUrl": "https://open.spotify.com/album/1DAuVHMlBvIjzWZALSUXbn",  "spotifyEmbed": "album/1DAuVHMlBvIjzWZALSUXbn" }
+    { "artist": "Perunggu",      "album": "Dalam Dinamika",        "cover": "/images/covers/perunggu-1.png",    "spotifyUrl": "https://open.spotify.com/album/1Mhq1R6xMuXuWUgbl6B6Iv", "spotifyEmbed": "album/1Mhq1R6xMuXuWUgbl6B6Iv" },
+    { "artist": "Perunggu",      "album": "Memorandum",            "cover": "/images/covers/perunggu-2.png",    "spotifyUrl": "https://open.spotify.com/album/2ZI3XeIrCM1PsOtK3rlMth", "spotifyEmbed": "album/2ZI3XeIrCM1PsOtK3rlMth" },
+    { "artist": "Pamungkas",     "album": "Walk The Talk",         "cover": "/images/covers/pamungkas.png",     "spotifyUrl": "https://open.spotify.com/track/76DzFyYlkByQMN4VXK7ynB",  "spotifyEmbed": "track/76DzFyYlkByQMN4VXK7ynB" },
+    { "artist": "Adele",         "album": "25",                    "cover": "/images/covers/adele.png",         "spotifyUrl": "https://open.spotify.com/album/3AvPX1B1HiFROvYjLb5Qwi",  "spotifyEmbed": "album/3AvPX1B1HiFROvYjLb5Qwi" },
+    { "artist": "Justin Bieber", "album": "My World",              "cover": "/images/covers/justin-bieber.png", "spotifyUrl": "https://open.spotify.com/album/1rG5TDs3jYh6OU753I54CI",  "spotifyEmbed": "album/1rG5TDs3jYh6OU753I54CI" },
+    { "artist": "Hindia",        "album": "Menari Dalam Bayangan", "cover": "/images/covers/hindia.png",        "spotifyUrl": "https://open.spotify.com/album/1DAuVHMlBvIjzWZALSUXbn",  "spotifyEmbed": "album/1DAuVHMlBvIjzWZALSUXbn" }
   ]
 }

@@ -83,18 +83,18 @@
           "label": "Mobile App:",
           "layout": "row",
           "images": [
-            "/works/nyaritempat/image 2.png",
-            "/works/nyaritempat/image 4.png",
-            "/works/nyaritempat/image 5.png",
-            "/works/nyaritempat/image 7.png"
+            "/works/nyaritempat/image-2.png",
+            "/works/nyaritempat/image-4.png",
+            "/works/nyaritempat/image-5.png",
+            "/works/nyaritempat/image-7.png"
           ]
         },
         {
           "label": "Website:",
           "layout": "row",
           "images": [
-            "/works/nyaritempat/image 10.png",
-            "/works/nyaritempat/image 11.png"
+            "/works/nyaritempat/image-10.png",
+            "/works/nyaritempat/image-11.png"
           ]
         }
       ],
@@ -118,14 +118,14 @@
           "label": "Homepage",
           "images": [
             "/works/nyaritempat/fullview.png",
-            "/works/nyaritempat/typing search.png"
+            "/works/nyaritempat/typing-search.png"
           ]
         },
         {
           "label": "Cafe Details & Review",
           "images": [
-            "/works/nyaritempat/Ringkasan.png",
-            "/works/nyaritempat/Ulasan filled.png"
+            "/works/nyaritempat/ringkasan.png",
+            "/works/nyaritempat/ulasan-filled.png"
           ]
         },
         {
@@ -138,8 +138,8 @@
         {
           "label": "All Area & Explore on web",
           "images": [
-            "/works/nyaritempat/Semua cafe.png",
-            "/works/nyaritempat/Daftarkan-cafe.png"
+            "/works/nyaritempat/semua-cafe.png",
+            "/works/nyaritempat/daftarkan-cafe.png"
           ]
         },
         {
