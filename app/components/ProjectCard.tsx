@@ -11,7 +11,7 @@ export function ProjectCardFooter({ project }: { project: Project }) {
       {project.liveUrl && (
         <a
           href={project.liveUrl}
-          className={`group/live flex items-center gap-[5px] font-light text-[14px] leading-[17px] ${muted} underline`}
+          className={`group/live flex items-center gap-[5px] font-light text-sm leading-[17px] ${muted} underline`}
         >
           Visit the live site
           <img
@@ -23,7 +23,7 @@ export function ProjectCardFooter({ project }: { project: Project }) {
       )}
       {project.appStores.length > 0 && (
         <div className="flex items-center gap-2">
-          <span className={`font-light text-[14px] leading-[17px] ${muted} whitespace-nowrap`}>
+          <span className={`font-light text-sm leading-[17px] ${muted} whitespace-nowrap`}>
             Visit App:
           </span>
           <div className="flex items-center gap-1">
@@ -99,16 +99,16 @@ export function ProjectCard({
 
       <TiltCard className="flex flex-col w-full">
         <div
-          className={`relative flex h-[180px] w-full items-center justify-center overflow-hidden rounded-t-[12px] p-2 sm:h-[225px] ${cardGradient} ${cardShadow}`}
+          className={`relative flex h-[180px] w-full items-center justify-center overflow-hidden rounded-t-xl p-2 sm:h-[225px] ${cardGradient} ${cardShadow}`}
         >
           {logo}
-          <div className={`absolute inset-0 rounded-t-[12px] pointer-events-none ${innerShadow}`} />
+          <div className={`absolute inset-0 rounded-t-xl pointer-events-none ${innerShadow}`} />
         </div>
         <div
-          className={`relative flex w-full flex-wrap items-center justify-between gap-3 overflow-hidden rounded-b-[12px] px-4 py-4 sm:px-5 ${cardGradient} ${cardShadow}`}
+          className={`relative flex w-full flex-wrap items-center justify-between gap-3 overflow-hidden rounded-b-xl px-4 py-4 sm:px-5 ${cardGradient} ${cardShadow}`}
         >
           {footer}
-          <div className={`absolute inset-0 rounded-b-[12px] pointer-events-none ${innerShadow}`} />
+          <div className={`absolute inset-0 rounded-b-xl pointer-events-none ${innerShadow}`} />
         </div>
       </TiltCard>
     </div>

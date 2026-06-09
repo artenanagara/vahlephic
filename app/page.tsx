@@ -19,7 +19,7 @@ export default function HomePage() {
     <div className="bg-[#fafafa] min-h-screen">
       <SiteNav activePage="home" />
 
-      <div className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[80px] lg:px-0 lg:pt-[136px]">
+      <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-20 lg:px-0 lg:pt-[136px]">
 
         {/* ── Author ── */}
         <div className="flex flex-col gap-6">
@@ -74,10 +74,10 @@ export default function HomePage() {
         </div>
 
         {/* ── Work section ── */}
-        <div id="work" className="flex flex-col gap-[80px]">
+        <div id="work" className="flex flex-col gap-20">
           <FadeUp>
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-4 text-[14px] text-[#111] whitespace-nowrap">
+              <div className="flex items-center gap-4 text-sm text-[#111] whitespace-nowrap">
                 <p className="font-medium tracking-[1.4px] uppercase leading-[22px]">Work</p>
                 <p className="font-light opacity-80 leading-[22px]">03</p>
               </div>

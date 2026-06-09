@@ -37,19 +37,19 @@ declare global {
 
 function SectionHeader({ title }: { title: string }) {
   return (
-    <p className="font-medium text-[14px] leading-[22px] text-[#111] tracking-[1.4px] uppercase">
+    <p className="font-medium text-sm leading-[22px] text-[#111] tracking-[1.4px] uppercase">
       {title}
     </p>
   );
 }
 
 function LogoBox({
-  src, alt, rounded = "rounded-[10.75px]",
+  src, alt, rounded = "rounded-xl",
 }: {
   src: string | null; alt: string; rounded?: string;
 }) {
   return (
-    <div className={`size-[43px] ${rounded} border border-[#e7e7e7] flex items-center justify-center overflow-hidden shrink-0 bg-[#f8f8f8]`}>
+    <div className={`size-11 ${rounded} border border-[#e7e7e7] flex items-center justify-center overflow-hidden shrink-0 bg-[#f8f8f8]`}>
       {src && <img src={src} alt={alt} className="w-full h-full object-cover" />}
     </div>
   );
@@ -164,7 +164,7 @@ export default function AboutPage() {
 
       <SiteNav activePage="about" />
 
-      <div className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[80px] lg:px-0 lg:pt-[136px]">
+      <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-20 lg:px-0 lg:pt-34">
 
         {/* ── Bio ── */}
         <div className="flex flex-col gap-6">
@@ -209,16 +209,16 @@ export default function AboutPage() {
                   <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
                     <div className="flex min-w-0 items-center gap-3">
                       <LogoBox src={item.logo} alt={item.company} />
-                      <div className="flex min-w-0 flex-col gap-[2px]">
-                        <p className="font-medium text-[16px] leading-[24px] text-[#111]">{item.role}</p>
+                      <div className="flex min-w-0 flex-col gap-0.5">
+                        <p className="font-medium text-base leading-6 text-[#111]">{item.role}</p>
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                          <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{item.company}</p>
+                          <p className={`font-light text-sm leading-[17px] ${muted}`}>{item.company}</p>
                           <div className="w-px h-3 bg-black/30 shrink-0" />
-                          <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{item.type}</p>
+                          <p className={`font-light text-sm leading-[17px] ${muted}`}>{item.type}</p>
                         </div>
                       </div>
                     </div>
-                    <p className={`font-light text-[14px] leading-[17px] ${muted} shrink-0 min-[520px]:text-right`}>{item.period}</p>
+                    <p className={`font-light text-sm leading-[17px] ${muted} shrink-0 min-[520px]:text-right`}>{item.period}</p>
                   </div>
                 ))}
               </div>
@@ -234,13 +234,13 @@ export default function AboutPage() {
               {aboutData.education.map((edu, i) => (
                 <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
                   <div className="flex min-w-0 items-center gap-3">
-                    <LogoBox src={edu.logo} alt={edu.institution} rounded="rounded-[7.94px]" />
-                    <div className="flex min-w-0 flex-col gap-[2px]">
-                      <p className="font-medium text-[16px] leading-[24px] text-[#111]">{edu.institution}</p>
-                      <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{edu.degree}</p>
+                    <LogoBox src={edu.logo} alt={edu.institution} rounded="rounded-lg" />
+                    <div className="flex min-w-0 flex-col gap-0.5">
+                      <p className="font-medium text-base leading-6 text-[#111]">{edu.institution}</p>
+                      <p className={`font-light text-sm leading-[17px] ${muted}`}>{edu.degree}</p>
                     </div>
                   </div>
-                  <p className={`font-light text-[14px] leading-[17px] ${muted} shrink-0 pt-[3.5px] min-[520px]:text-right`}>{edu.period}</p>
+                  <p className={`font-light text-sm leading-[17px] ${muted} shrink-0 pt-1 min-[520px]:text-right`}>{edu.period}</p>
                 </div>
               ))}
             </div>
@@ -266,14 +266,14 @@ export default function AboutPage() {
                       >
                         <button
                           onClick={() => handleToggle(track.spotifyEmbed)}
-                          className="relative size-[43px] rounded-[7.94px] overflow-hidden shrink-0 bg-[#f0f0f0] focus:outline-none"
+                          className="relative size-11 rounded-lg overflow-hidden shrink-0 bg-[#f0f0f0] focus:outline-none"
                           aria-label={isPlaying ? "Pause" : "Play preview"}
                         >
                           {track.cover && (
                             <img src={track.cover} alt={track.album} className="w-full h-full object-cover" />
                           )}
                           <motion.div
-                            className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-[7.94px]"
+                            className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: isVisible || isPlaying ? 1 : 0 }}
                             transition={{ duration: 0.18 }}
@@ -295,10 +295,10 @@ export default function AboutPage() {
                           href={track.spotifyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex flex-col gap-[2px] min-w-0"
+                          className="flex flex-col gap-0.5 min-w-0"
                         >
-                          <p className="font-medium text-[16px] leading-[24px] text-[#111] truncate">{track.artist}</p>
-                          <p className={`font-light text-[14px] leading-[17px] ${muted} truncate`}>{track.album}</p>
+                          <p className="font-medium text-base leading-6 text-[#111] truncate">{track.artist}</p>
+                          <p className={`font-light text-sm leading-[17px] ${muted} truncate`}>{track.album}</p>
                         </a>
                       </div>
                     );

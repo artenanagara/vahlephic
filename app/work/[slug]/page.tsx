@@ -126,12 +126,12 @@ function ImageGroups({ groups }: { groups: ImageGroup[] }) {
       {groups.map((group, gi) => (
         <div key={gi} className="flex flex-col gap-4">
           {group.label && (
-            <p className={`font-light text-[16px] leading-[20px] ${muted}`}>{group.label}</p>
+            <p className={`font-light text-base leading-5 ${muted}`}>{group.label}</p>
           )}
           {group.layout === "row" ? (
-            <div className="flex snap-x items-stretch gap-[10px] overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
+            <div className="flex snap-x items-stretch gap-2.5 overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
               {group.images.map((img, ii) => (
-                <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-[6px] sm:min-w-0">
+                <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-md sm:min-w-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img} alt={`${group.label ?? "reference"} ${ii + 1}`} className="w-full h-full object-cover block" />
                 </div>
@@ -140,7 +140,7 @@ function ImageGroups({ groups }: { groups: ImageGroup[] }) {
           ) : (
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {group.images.map((img, ii) => (
-                <div key={ii} className={`rounded-[8px] overflow-hidden ${cardShadow}`}>
+                <div key={ii} className={`rounded-lg overflow-hidden ${cardShadow}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img} alt={`${group.label ?? "reference"} ${ii + 1}`} className="w-full h-auto block" />
                 </div>
@@ -158,10 +158,10 @@ function OutcomeScreens({ screens }: { screens: Screen[] }) {
     <div className="flex flex-col gap-4">
       {screens.map((screen, si) => (
         <div key={si} className="w-full rounded-[20px] bg-[#F8F8F8] border border-[#E9E9E9] p-4 flex flex-col gap-3">
-          <p className={`font-light text-[16px] leading-[20px] ${muted}`}>{screen.label}</p>
-          <div className="flex snap-x items-stretch gap-[10px] overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
+          <p className={`font-light text-base leading-5 ${muted}`}>{screen.label}</p>
+          <div className="flex snap-x items-stretch gap-2.5 overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
             {screen.images.map((img, ii) => (
-              <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-[6px] sm:min-w-0">
+              <div key={ii} className="min-w-[68%] flex-1 snap-start overflow-hidden rounded-md sm:min-w-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={img} alt={`${screen.label} ${ii + 1}`} className="w-full h-auto block" />
               </div>
@@ -174,14 +174,13 @@ function OutcomeScreens({ screens }: { screens: Screen[] }) {
 }
 
 function Arrow({ dir }: { dir: "right" | "left" | "down" }) {
-  const rotate = { right: "0deg", left: "180deg", down: "90deg" };
+  const rotateClass = { right: "rotate-0", left: "rotate-180", down: "rotate-90" } as const;
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src="/icons/arrow.svg"
       alt=""
-      className="shrink-0"
-      style={{ transform: `rotate(${rotate[dir]})`, width: 8, height: 7, display: "block" }}
+      className={`shrink-0 block w-2 h-[7px] ${rotateClass[dir]}`}
     />
   );
 }
@@ -196,13 +195,13 @@ const flowCardShell: React.CSSProperties = {
 function FlowCard({ text, blue = false }: { text: string; blue?: boolean }) {
   return (
     <div
-      className="flow-card-shell flex min-w-[120px] flex-1 overflow-hidden rounded-[12px] p-[6px] pt-[11px] sm:min-w-0"
+      className="flow-card-shell flex min-w-30 flex-1 overflow-hidden rounded-xl p-1.5 pt-[11px] sm:min-w-0"
       style={flowCardShell}
     >
       <div
-        className={`flow-card-inner flex-1 rounded-[8px] border-[0.5px] border-[#E7E7E7] overflow-hidden flex items-center justify-center p-2 ${blue ? "flow-card-inner--after bg-[#F0F9FE]" : "bg-[#F6F6F6]"}`}
+        className={`flow-card-inner flex-1 rounded-lg border-[0.5px] border-[#E7E7E7] overflow-hidden flex items-center justify-center p-2 ${blue ? "flow-card-inner--after bg-[#F0F9FE]" : "bg-[#F6F6F6]"}`}
       >
-        <p className="text-center text-[11.7px] font-normal leading-[1.4] text-[#4F4F4F]">
+        <p className="text-center text-xs font-normal leading-[1.4] text-[#4F4F4F]">
           {text}
         </p>
       </div>
@@ -218,11 +217,11 @@ function ProblemFlow({ label, steps }: { label?: string; steps: string[] }) {
   return (
     <div className="flex flex-col items-center gap-3 w-full">
       {label && (
-        <p className={`font-light text-[16px] leading-[24px] ${muted}`}>{label}</p>
+        <p className={`font-light text-base leading-6 ${muted}`}>{label}</p>
       )}
       <div className="w-full overflow-x-auto pb-1">
-        <div className="flex min-w-[500px] flex-col items-end gap-2 sm:min-w-0">
-          <div className="w-full flex items-center gap-[6px]">
+        <div className="flex min-w-125 flex-col items-end gap-2 sm:min-w-0">
+          <div className="w-full flex items-center gap-1.5">
             {row1.map((text, i) => (
               <div key={i} className="contents">
                 <FlowCard text={text} />
@@ -240,7 +239,7 @@ function ProblemFlow({ label, steps }: { label?: string; steps: string[] }) {
             </div>
           </div>
 
-          <div className="w-full flex items-center gap-[6px]">
+          <div className="w-full flex items-center gap-1.5">
             {row2.map((text, i) => (
               <div key={i} className="contents">
                 <FlowCard text={text} />
@@ -259,10 +258,10 @@ function AfterFlow({ label, steps }: { label?: string; steps: string[] }) {
   return (
     <div className="flex flex-col items-center gap-3 w-full">
       {label && (
-        <p className={`font-light text-[16px] leading-[24px] ${muted}`}>{label}</p>
+        <p className={`font-light text-base leading-6 ${muted}`}>{label}</p>
       )}
       <div className="w-full overflow-x-auto pb-1">
-        <div className="flex min-w-[500px] items-center gap-[6px] sm:min-w-0">
+        <div className="flex min-w-125 items-center gap-1.5 sm:min-w-0">
           {steps.map((text, i) => (
             <div key={i} className="contents">
               <FlowCard text={text} blue />
@@ -291,8 +290,8 @@ function CaseSection({ section }: { section: WorkSection }) {
   if (section.card) {
     return (
       <div id={section.id} className="flex flex-col gap-5">
-        <div className="w-full rounded-[16px] bg-[#F8F8F8] border border-[#E9E9E9] p-4 flex flex-col gap-4 sm:rounded-[20px]">
-          <p className="font-semibold text-[16px] leading-[24px] text-[#111]">{section.title}</p>
+        <div className="w-full rounded-2xl bg-[#F8F8F8] border border-[#E9E9E9] p-4 flex flex-col gap-4 sm:rounded-[20px]">
+          <p className="font-semibold text-base leading-6 text-[#111]">{section.title}</p>
           {bodyBefore}
           {section.groups && <ImageGroups groups={section.groups} />}
         </div>
@@ -355,7 +354,7 @@ export default async function WorkDetailPage({
 
       {/* ── Fixed sidebar ── */}
       <nav
-        className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-[620px] items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-[200px] lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none"
+        className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-155 items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-50 lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none"
       >
         {work.logo ? (
           <div className="shrink-0 inline-flex">
@@ -374,7 +373,7 @@ export default async function WorkDetailPage({
         <div className="flex min-w-0 items-center gap-4 lg:flex-col lg:items-start">
           <Link
             href="/"
-            className={`flex shrink-0 items-center gap-1 font-light text-[14px] leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}
+            className={`flex shrink-0 items-center gap-1 font-light text-sm leading-5 opacity-80 transition-opacity duration-150 hover:opacity-100 ${muted}`}
           >
             ← Back
           </Link>
@@ -386,7 +385,7 @@ export default async function WorkDetailPage({
       </nav>
 
       {/* ── Scrollable content ── */}
-      <div className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[60px] lg:px-0 lg:pt-[200px]">
+      <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-15 lg:px-0 lg:pt-50">
 
         {/* ── Header ── */}
         <div className="flex flex-col gap-5" style={{ animation: "fadeUp 0.72s cubic-bezier(0.22,1,0.36,1) backwards" }}>
@@ -397,17 +396,17 @@ export default async function WorkDetailPage({
             <p className={`font-light text-base leading-[22px] ${muted}`}>{work.description}</p>
           </div>
 
-          <div className="w-full rounded-[16px] bg-[#F8F8F8] border border-[#E9E9E9] p-[6px] pb-3 flex flex-col gap-3 sm:rounded-[20px]">
-            <div className="w-full bg-white rounded-[16px] border border-[#E9E9E9] p-[6px]">
-              <div className="w-full bg-[#FBFBFB] rounded-[12px] border border-[#F0F0F0] p-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="w-full rounded-2xl bg-[#F8F8F8] border border-[#E9E9E9] p-1.5 pb-3 flex flex-col gap-3 sm:rounded-[20px]">
+            <div className="w-full bg-white rounded-2xl border border-[#E9E9E9] p-1.5">
+              <div className="w-full bg-[#FBFBFB] rounded-xl border border-[#F0F0F0] p-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="grid w-full grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:w-auto sm:flex sm:items-center sm:gap-8">
-                  <div className="flex flex-col gap-[2px]">
-                    <p className={`font-medium text-[16px] leading-[22px] ${muted}`}>Role</p>
-                    <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{work.meta.role}</p>
+                  <div className="flex flex-col gap-0.5">
+                    <p className={`font-medium text-base leading-[22px] ${muted}`}>Role</p>
+                    <p className={`font-light text-sm leading-[17px] ${muted}`}>{work.meta.role}</p>
                   </div>
-                  <div className="flex flex-col gap-[2px]">
-                    <p className={`font-medium text-[16px] leading-[22px] ${muted}`}>Timeline</p>
-                    <p className={`font-light text-[14px] leading-[17px] ${muted}`}>{work.meta.timeline}</p>
+                  <div className="flex flex-col gap-0.5">
+                    <p className={`font-medium text-base leading-[22px] ${muted}`}>Timeline</p>
+                    <p className={`font-light text-sm leading-[17px] ${muted}`}>{work.meta.timeline}</p>
                   </div>
                 </div>
 
@@ -416,7 +415,7 @@ export default async function WorkDetailPage({
                     href={work.meta.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group/visit flex items-center gap-[5px] font-light text-[14px] leading-[17px] ${muted} underline`}
+                    className={`group/visit flex items-center gap-[5px] font-light text-sm leading-[17px] ${muted} underline`}
                   >
                     Visit website
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(17,17,17,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-150 group-hover/visit:translate-x-[2px] group-hover/visit:-translate-y-[2px]">

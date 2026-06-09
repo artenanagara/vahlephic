@@ -58,10 +58,9 @@ export function TiltCard({ children, className = "", intensity = 7 }: Props) {
   return (
     <div
       ref={ref}
-      className={className}
+      className={`${className} will-change-transform`}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      style={{ willChange: "transform" }}
     >
       {children}
     </div>

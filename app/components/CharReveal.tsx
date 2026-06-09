@@ -22,11 +22,12 @@ export function CharReveal({ text, className, startDelay = 0, charDelay = 0.024 
     <span className={className}>
       {words.map(({ chars }, wi) => (
         <Fragment key={wi}>
-          {/* overflow:hidden creates the "wipe from below" mask */}
-          <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom", lineHeight: "1.2" }}>
+          {/* overflow-hidden creates the "wipe from below" mask */}
+          <span className="inline-block overflow-hidden align-bottom leading-[1.2]">
             {chars.map(({ char, idx }) => (
               <motion.span
                 key={idx}
+                className="inline-block"
                 initial={{ y: "110%" }}
                 animate={{ y: "0%" }}
                 transition={{
@@ -34,13 +35,12 @@ export function CharReveal({ text, className, startDelay = 0, charDelay = 0.024 
                   ease: [0.22, 1, 0.36, 1],
                   delay: startDelay + idx * charDelay,
                 }}
-                style={{ display: "inline-block" }}
               >
                 {char}
               </motion.span>
             ))}
           </span>
-          {wi < words.length - 1 && " "}
+          {wi < words.length - 1 && " "}
         </Fragment>
       ))}
     </span>

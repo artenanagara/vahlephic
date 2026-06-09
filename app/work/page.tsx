@@ -15,13 +15,13 @@ export default function WorkPage() {
     <div className="bg-[#fafafa] min-h-screen">
       <SiteNav activePage="work" />
 
-      <div className="page-content-shell mx-auto flex w-full max-w-[620px] flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-[80px] lg:px-0 lg:pt-[200px]">
+      <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-20 lg:px-0 lg:pt-50">
 
         {/* ── Work section ── */}
-        <div className="flex flex-col gap-[80px]">
+        <div className="flex flex-col gap-20">
           <FadeUp>
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-4 text-[14px] text-[#111] whitespace-nowrap">
+              <div className="flex items-center gap-4 text-sm text-[#111] whitespace-nowrap">
                 <p className="font-medium tracking-[1.4px] uppercase leading-[22px]">Work</p>
                 <p className="font-light opacity-80 leading-[22px]">
                   {String(projects.length).padStart(2, "0")}
@@ -51,7 +51,7 @@ export default function WorkPage() {
         <div className="flex flex-col gap-5">
           <FadeUp>
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-4 text-[14px] text-[#111] whitespace-nowrap">
+              <div className="flex items-center gap-4 text-sm text-[#111] whitespace-nowrap">
                 <p className="font-medium tracking-[1.4px] uppercase leading-[22px]">Exploration</p>
                 <p className="font-light opacity-80 leading-[22px]">07</p>
               </div>
@@ -64,7 +64,7 @@ export default function WorkPage() {
               <img
                 src={`/works/exploration/image-${n}.png`}
                 alt={`Exploration ${n}`}
-                className="w-full h-auto block rounded-[12px]"
+                className="w-full h-auto block rounded-xl"
               />
             </FadeUp>
           ))}

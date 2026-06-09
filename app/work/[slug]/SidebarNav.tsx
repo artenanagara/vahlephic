@@ -43,7 +43,7 @@ export default function SidebarNav({ items }: { items: NavItem[] }) {
   };
 
   return (
-    <div className="flex flex-col gap-[6px]">
+    <div className="flex flex-col gap-1.5">
       {items.map((item) => {
         const isActive = item.id === activeId;
         return (
@@ -51,7 +51,7 @@ export default function SidebarNav({ items }: { items: NavItem[] }) {
             key={item.id}
             onClick={() => handleClick(item.id)}
             className={[
-              "text-left text-[14px] leading-5 transition-all duration-200",
+              "text-left text-sm leading-5 transition-all duration-200",
               isActive
                 ? "font-semibold text-[#111]"
                 : `font-light opacity-60 ${muted}`,

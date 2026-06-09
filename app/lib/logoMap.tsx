@@ -3,24 +3,21 @@ export const logoMap: Record<string, React.ReactNode> = {
     <img
       src="/works/nyaritempat/nyaritempat-logo.svg"
       alt="nyaritempat logo"
-      className="project-logo block"
-      style={{ height: 28, width: "auto" }}
+      className="project-logo block h-7 w-auto"
     />
   ),
   kasheer: (
     <img
       src="/works/kasheer/kasheer-logo.png"
       alt="Kasheer logo"
-      className="project-logo block"
-      style={{ height: 24, width: "auto" }}
+      className="project-logo block h-6 w-auto"
     />
   ),
   "billing-rintisan": (
     <img
       src="/works/rintisan/rintisan-logo.png"
       alt="Billing Rintisan logo"
-      className="project-logo block"
-      style={{ height: 44, width: 44 }}
+      className="project-logo block size-11"
     />
   ),
 };
