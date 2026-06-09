@@ -37,7 +37,7 @@ declare global {
 
 function SectionHeader({ title }: { title: string }) {
   return (
-    <p className="font-medium text-sm leading-[22px] text-[#111] tracking-[1.4px] uppercase">
+    <p className="font-medium text-sm leading-5.5 text-[#111] tracking-[1.4px] uppercase">
       {title}
     </p>
   );
@@ -50,6 +50,7 @@ function LogoBox({
 }) {
   return (
     <div className={`size-11 ${rounded} border border-[#e7e7e7] flex items-center justify-center overflow-hidden shrink-0 bg-[#f8f8f8]`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       {src && <img src={src} alt={alt} className="w-full h-full object-cover" />}
     </div>
   );
@@ -174,7 +175,7 @@ export default function AboutPage() {
                 <CharReveal text="Rizal Vahlevi" startDelay={0.1} />
               </p>
               <motion.p
-                className="text-base leading-[22px]"
+                className="text-base leading-5.5"
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.55, ease, delay: 0.52 }}
@@ -187,7 +188,7 @@ export default function AboutPage() {
           </div>
 
           <motion.p
-            className={`font-light text-base leading-[26px] ${muted}`}
+            className={`font-light text-base leading-6 ${muted}`}
             initial={{ y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.65, ease, delay: 0.62 }}
@@ -201,24 +202,24 @@ export default function AboutPage() {
           <div className="flex flex-col gap-6">
             <SectionHeader title="Experience" />
             <div className="flex flex-col gap-4">
-              <p className={`font-light text-base leading-[22px] ${muted}`}>
+              <p className={`font-light text-base leading-5.5 ${muted}`}>
                 {aboutData.experience.summary}
               </p>
               <div className="flex flex-col gap-2">
                 {aboutData.experience.items.map((item, i) => (
-                  <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
+                  <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/2.5 min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
                     <div className="flex min-w-0 items-center gap-3">
                       <LogoBox src={item.logo} alt={item.company} />
                       <div className="flex min-w-0 flex-col gap-0.5">
                         <p className="font-medium text-base leading-6 text-[#111]">{item.role}</p>
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                          <p className={`font-light text-sm leading-[17px] ${muted}`}>{item.company}</p>
+                          <p className={`font-light text-sm leading-4.25 ${muted}`}>{item.company}</p>
                           <div className="w-px h-3 bg-black/30 shrink-0" />
-                          <p className={`font-light text-sm leading-[17px] ${muted}`}>{item.type}</p>
+                          <p className={`font-light text-sm leading-4.25 ${muted}`}>{item.type}</p>
                         </div>
                       </div>
                     </div>
-                    <p className={`font-light text-sm leading-[17px] ${muted} shrink-0 min-[520px]:text-right`}>{item.period}</p>
+                    <p className={`font-light text-sm leading-4.25 ${muted} shrink-0 min-[520px]:text-right`}>{item.period}</p>
                   </div>
                 ))}
               </div>
@@ -232,15 +233,15 @@ export default function AboutPage() {
             <SectionHeader title="Education" />
             <div className="flex flex-col gap-2">
               {aboutData.education.map((edu, i) => (
-                <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
+                <div key={i} className="flex flex-col gap-3 py-2 px-3 -mx-3 rounded-xl transition-colors duration-150 hover:bg-black/2.5 min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
                   <div className="flex min-w-0 items-center gap-3">
                     <LogoBox src={edu.logo} alt={edu.institution} rounded="rounded-lg" />
                     <div className="flex min-w-0 flex-col gap-0.5">
                       <p className="font-medium text-base leading-6 text-[#111]">{edu.institution}</p>
-                      <p className={`font-light text-sm leading-[17px] ${muted}`}>{edu.degree}</p>
+                      <p className={`font-light text-sm leading-4.25 ${muted}`}>{edu.degree}</p>
                     </div>
                   </div>
-                  <p className={`font-light text-sm leading-[17px] ${muted} shrink-0 pt-1 min-[520px]:text-right`}>{edu.period}</p>
+                  <p className={`font-light text-sm leading-4.25 ${muted} shrink-0 pt-1 min-[520px]:text-right`}>{edu.period}</p>
                 </div>
               ))}
             </div>
@@ -260,7 +261,7 @@ export default function AboutPage() {
                     return (
                       <div
                         key={col}
-                        className="flex min-w-0 items-center gap-3 rounded-xl px-3 py-2 transition-colors duration-150 hover:bg-black/[0.025] min-[520px]:-mx-3"
+                        className="flex min-w-0 items-center gap-3 rounded-xl px-3 py-2 transition-colors duration-150 hover:bg-black/2.5 min-[520px]:-mx-3"
                         onMouseEnter={() => handleMouseEnter(track.spotifyEmbed)}
                         onMouseLeave={() => handleMouseLeave(track.spotifyEmbed)}
                       >
@@ -270,6 +271,7 @@ export default function AboutPage() {
                           aria-label={isPlaying ? "Pause" : "Play preview"}
                         >
                           {track.cover && (
+                            // eslint-disable-next-line @next/next/no-img-element
                             <img src={track.cover} alt={track.album} className="w-full h-full object-cover" />
                           )}
                           <motion.div
@@ -298,7 +300,7 @@ export default function AboutPage() {
                           className="flex flex-col gap-0.5 min-w-0"
                         >
                           <p className="font-medium text-base leading-6 text-[#111] truncate">{track.artist}</p>
-                          <p className={`font-light text-sm leading-[17px] ${muted} truncate`}>{track.album}</p>
+                          <p className={`font-light text-sm leading-4.25 ${muted} truncate`}>{track.album}</p>
                         </a>
                       </div>
                     );

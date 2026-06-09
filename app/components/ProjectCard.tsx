@@ -11,19 +11,20 @@ export function ProjectCardFooter({ project }: { project: Project }) {
       {project.liveUrl && (
         <a
           href={project.liveUrl}
-          className={`group/live flex items-center gap-[5px] font-light text-sm leading-[17px] ${muted} underline`}
+          className={`group/live flex items-center gap-1.25 font-light text-sm leading-4.25 ${muted} underline`}
         >
           Visit the live site
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={ASSETS.arrowUpRight}
             alt=""
-            className="size-4 transition-transform duration-150 group-hover/live:translate-x-[2px] group-hover/live:-translate-y-[2px]"
+            className="size-4 transition-transform duration-150 group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5"
           />
         </a>
       )}
       {project.appStores.length > 0 && (
         <div className="flex items-center gap-2">
-          <span className={`font-light text-sm leading-[17px] ${muted} whitespace-nowrap`}>
+          <span className={`font-light text-sm leading-4.25 ${muted} whitespace-nowrap`}>
             Visit App:
           </span>
           <div className="flex items-center gap-1">
@@ -34,6 +35,7 @@ export function ProjectCardFooter({ project }: { project: Project }) {
                 rel="noopener noreferrer"
                 className="transition-transform duration-150 hover:scale-110 active:scale-95"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={ASSETS.googlePlay} alt="Google Play" className="theme-store-icon size-5" />
               </a>
             )}
@@ -44,6 +46,7 @@ export function ProjectCardFooter({ project }: { project: Project }) {
                 rel="noopener noreferrer"
                 className="transition-transform duration-150 hover:scale-110 active:scale-95"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={ASSETS.apple} alt="App Store" className="theme-store-icon size-5" />
               </a>
             )}
@@ -71,25 +74,26 @@ export function ProjectCard({
   return (
     <div className="flex w-full flex-col gap-5 sm:gap-6">
       <div className="flex flex-col gap-4">
-        <p className={`font-light text-base leading-[22px] ${muted}`}>{num}</p>
+        <p className={`font-light text-base leading-5.5 ${muted}`}>{num}</p>
         <div className="flex flex-col gap-4">
           <p className="font-semibold text-2xl leading-9 text-[#111]">{title}</p>
-          <p className={`font-light text-base leading-[22px] ${muted}`}>{description}</p>
+          <p className={`font-light text-base leading-5.5 ${muted}`}>{description}</p>
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <p className={`font-light text-base leading-[22px] ${muted}`}>{period}</p>
+          <p className={`font-light text-base leading-5.5 ${muted}`}>{period}</p>
           {caseStudy && slug && (
             <>
-              <div className="w-px h-[18px] bg-black/20" />
+              <div className="w-px h-4.5 bg-black/20" />
               <Link
                 href={`/work/${slug}`}
-                className={`group/cs flex items-center gap-2 font-light text-base leading-[22px] ${muted} underline`}
+                className={`group/cs flex items-center gap-2 font-light text-base leading-5.5 ${muted} underline`}
               >
                 Read case study
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={ASSETS.document}
                   alt=""
-                  className="size-5 transition-transform duration-150 group-hover/cs:translate-x-[2px]"
+                  className="size-5 transition-transform duration-150 group-hover/cs:translate-x-0.5"
                 />
               </Link>
             </>
@@ -99,7 +103,7 @@ export function ProjectCard({
 
       <TiltCard className="flex flex-col w-full">
         <div
-          className={`relative flex h-[180px] w-full items-center justify-center overflow-hidden rounded-t-xl p-2 sm:h-[225px] ${cardGradient} ${cardShadow}`}
+          className={`relative flex h-45 w-full items-center justify-center overflow-hidden rounded-t-xl p-2 sm:h-56.25 ${cardGradient} ${cardShadow}`}
         >
           {logo}
           <div className={`absolute inset-0 rounded-t-xl pointer-events-none ${innerShadow}`} />
