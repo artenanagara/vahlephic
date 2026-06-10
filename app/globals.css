@@ -21,9 +21,11 @@ html {
 @media (min-width: 1024px) {
   .side-nav-shell {
     border-bottom: none;
-    /* content is max-w-155 (620px) centered → left edge = 50vw - 310px
-       sidebar sits 140px to the left of content's left edge */
-    left: max(20px, calc(50vw - 310px - 140px));
+    /* content (620px) centered → left edge = 50vw − 310px
+       gap between sidebar right edge and content left edge = 140px
+       sidebar width = lg:w-32 = 128px
+       sidebar left = 50vw − 310px − 140px − 128px = 50vw − 578px */
+    left: max(20px, calc(50vw - 578px));
   }
 }
 
