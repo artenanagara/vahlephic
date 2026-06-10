@@ -351,11 +351,10 @@ export default async function WorkDetailPage({
 
   return (
     <div className="bg-[#fafafa] min-h-screen">
-      <div className="mx-auto flex w-full max-w-155 flex-col px-5 sm:px-8 lg:max-w-[796px] lg:flex-row lg:items-start lg:gap-12 lg:px-0 lg:pt-34">
 
-      {/* ── Sidebar ── */}
+      {/* ── Fixed sidebar ── */}
       <nav
-        className="side-nav-shell sticky top-0 z-20 flex w-full items-center justify-between gap-4 bg-[#fafafa]/90 py-4 backdrop-blur-md lg:sticky lg:top-34 lg:w-32 lg:shrink-0 lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:self-start lg:bg-transparent lg:py-0 lg:backdrop-blur-none"
+        className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-155 items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-34 lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none"
       >
         {work.logo ? (
           <div className="shrink-0 inline-flex">
@@ -386,7 +385,7 @@ export default async function WorkDetailPage({
       </nav>
 
       {/* ── Scrollable content ── */}
-      <div className="page-content-shell flex w-full flex-col gap-12 pb-16 pt-10 sm:pb-20 lg:flex-1 lg:gap-15 lg:pb-20 lg:pt-0">
+      <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-15 lg:px-0 lg:pt-34">
 
         {/* ── Header ── */}
         <div className="flex flex-col gap-5" style={{ animation: "fadeUp 0.72s cubic-bezier(0.22,1,0.36,1) backwards" }}>
@@ -446,7 +445,6 @@ export default async function WorkDetailPage({
         <RevealSection>
           <Footer />
         </RevealSection>
-      </div>
       </div>
     </div>
   );
