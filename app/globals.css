@@ -18,6 +18,15 @@ html {
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
 }
 
+/* On large screens, anchor the fixed sidebar to the left edge of the
+   centered content column (max-w-155 = 620px, half = 310px).
+   160px = sidebar width (~128px) + gap (~32px). */
+@media (min-width: 1024px) {
+  .side-nav-shell {
+    left: max(24px, calc(50vw - 310px - 160px));
+  }
+}
+
 .theme-toggle {
   position: relative;
   display: inline-flex;
