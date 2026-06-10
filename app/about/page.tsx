@@ -163,9 +163,9 @@ export default function AboutPage() {
         style={{ position: "fixed", bottom: 0, right: 0, width: 300, height: 80, pointerEvents: "none", zIndex: -1 }}
       />
 
-      <div className="mx-auto flex w-full max-w-155 flex-col px-5 sm:px-8 lg:max-w-[796px] lg:flex-row lg:items-start lg:gap-12 lg:px-0">
+      <div className="mx-auto flex w-full max-w-155 flex-col px-5 sm:px-8 lg:max-w-[796px] lg:flex-row lg:items-start lg:gap-12 lg:px-0 lg:pt-34">
         <SiteNav activePage="about" />
-        <div className="page-content-shell flex w-full flex-col gap-16 pb-16 pt-10 sm:pb-20 lg:flex-1 lg:gap-20 lg:pb-20 lg:pt-34">
+        <div className="page-content-shell flex w-full flex-col gap-16 pb-16 pt-10 sm:pb-20 lg:flex-1 lg:gap-20 lg:pb-20 lg:pt-0">
 
         {/* ── Bio ── */}
         <div className="flex flex-col gap-6">

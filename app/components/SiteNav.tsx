@@ -14,7 +14,7 @@ const NAV_LINKS: { label: string; href: string; page: ActivePage }[] = [
 
 export function SiteNav({ activePage }: { activePage: ActivePage }) {
   return (
-    <nav className="side-nav-shell sticky top-0 z-20 flex w-full items-center justify-between gap-4 bg-[#fafafa]/90 py-4 backdrop-blur-md lg:sticky lg:top-34 lg:w-32 lg:shrink-0 lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:self-start lg:bg-transparent lg:py-0 lg:backdrop-blur-none lg:pt-34">
+    <nav className="side-nav-shell sticky top-0 z-20 flex w-full items-center justify-between gap-4 bg-[#fafafa]/90 py-4 backdrop-blur-md lg:sticky lg:top-34 lg:w-32 lg:shrink-0 lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:self-start lg:bg-transparent lg:py-0 lg:backdrop-blur-none">
       <motion.div
         className="size-8 rounded-lg overflow-hidden border border-[#e9e9e9] bg-[#f2f7ff] shrink-0"
         initial={{ opacity: 0, scale: 0.7 }}
