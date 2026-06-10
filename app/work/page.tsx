@@ -14,7 +14,7 @@ const projects = projectsData as Project[];
 export default function WorkPage() {
   return (
     <div className="bg-[#fafafa] min-h-screen">
-      <SiteNav activePage="work" />
+      <SiteNav activePage="work" topClass="lg:top-50" />
 
       <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-20 lg:px-0 lg:pt-50">
 

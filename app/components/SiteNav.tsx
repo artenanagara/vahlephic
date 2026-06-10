@@ -12,9 +12,9 @@ const NAV_LINKS: { label: string; href: string; page: ActivePage }[] = [
   { label: "About", href: "/about", page: "about" },
 ];
 
-export function SiteNav({ activePage }: { activePage: ActivePage }) {
+export function SiteNav({ activePage, topClass = "lg:top-34" }: { activePage: ActivePage; topClass?: string }) {
   return (
-    <nav className="side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-155 items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:top-50 lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none">
+    <nav className={`side-nav-shell sticky top-0 z-20 mx-auto flex w-full max-w-155 items-center justify-between gap-4 bg-[#fafafa]/90 px-5 py-4 backdrop-blur-md sm:px-8 lg:fixed lg:mx-0 lg:w-auto lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none ${topClass}`}>
       <motion.div
         className="size-8 rounded-lg overflow-hidden border border-[#e9e9e9] bg-[#f2f7ff] shrink-0"
         initial={{ opacity: 0, scale: 0.7 }}
