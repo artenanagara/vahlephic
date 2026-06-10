@@ -222,17 +222,6 @@ html[data-theme="dark"] .cursor-ring.is-hover {
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-@media (min-width: 1024px) {
-  .side-nav-shell {
-    left: calc(12.5% + 60px);
-    border-bottom: 0;
-  }
-
-  .page-content-shell {
-    margin-left: min(calc(25% + 110px), calc(100% - 620px - 80px));
-  }
-}
-
 /* ── Entrance animation (CSS, no JS required) ─────────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
