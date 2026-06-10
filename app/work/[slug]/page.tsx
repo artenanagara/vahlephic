@@ -92,7 +92,7 @@ export async function generateStaticParams() {
 function Para({ text }: { text: string }) {
   return (
     <p
-      className={`font-light text-base leading-[22px] ${muted}`}
+      className={`font-light text-base leading-5.5 ${muted}`}
       dangerouslySetInnerHTML={{ __html: text }}
     />
   );
@@ -100,7 +100,7 @@ function Para({ text }: { text: string }) {
 
 function ContentImage({ src, alt }: { src: string; alt?: string }) {
   return (
-    <div className={`w-full rounded-[10px] overflow-hidden transition-transform duration-200 hover:-translate-y-[2px] ${cardShadow}`}>
+    <div className={`w-full rounded-[10px] overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 ${cardShadow}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt ?? ""} className="w-full h-auto block" />
     </div>
@@ -112,7 +112,7 @@ function BeforeAfterSection({ data }: { data: BeforeAfter }) {
     <div className="flex flex-col gap-3 w-full">
       {(["before", "after"] as const).map((key) => (
         <div key={key} className="flex flex-col gap-2">
-          <p className={`font-medium text-sm leading-[18px] ${muted}`}>{data[key].label}</p>
+          <p className={`font-medium text-sm leading-4.5 ${muted}`}>{data[key].label}</p>
           <ContentImage src={data[key].image} alt={data[key].label} />
         </div>
       ))}
@@ -180,7 +180,7 @@ function Arrow({ dir }: { dir: "right" | "left" | "down" }) {
     <img
       src="/icons/arrow.svg"
       alt=""
-      className={`shrink-0 block w-2 h-[7px] ${rotateClass[dir]}`}
+      className={`shrink-0 block w-2 h-1.75 ${rotateClass[dir]}`}
     />
   );
 }
@@ -195,13 +195,13 @@ const flowCardShell: React.CSSProperties = {
 function FlowCard({ text, blue = false }: { text: string; blue?: boolean }) {
   return (
     <div
-      className="flow-card-shell flex min-w-30 flex-1 overflow-hidden rounded-xl p-1.5 pt-[11px] sm:min-w-0"
+      className="flow-card-shell flex min-w-30 flex-1 overflow-hidden rounded-xl p-1.5 pt-4.5 sm:min-w-0"
       style={flowCardShell}
     >
       <div
         className={`flow-card-inner flex-1 rounded-lg border-[0.5px] border-[#E7E7E7] overflow-hidden flex items-center justify-center p-2 ${blue ? "flow-card-inner--after bg-[#F0F9FE]" : "bg-[#F6F6F6]"}`}
       >
-        <p className="text-center text-xs font-normal leading-[1.4] text-[#4F4F4F]">
+        <p className="text-center text-xs font-normal leading-4.5 text-[#4F4F4F]">
           {text}
         </p>
       </div>
@@ -303,7 +303,7 @@ function CaseSection({ section }: { section: WorkSection }) {
   return (
     <div id={section.id} className="flex flex-col gap-5">
       <div className="flex flex-col gap-2">
-        <p className="font-semibold text-xl leading-[28px] text-[#111]">{section.title}</p>
+        <p className="font-semibold text-xl leading-7 text-[#111]">{section.title}</p>
         <div className="h-px w-full bg-black/10" />
       </div>
 
@@ -390,10 +390,10 @@ export default async function WorkDetailPage({
         {/* ── Header ── */}
         <div className="flex flex-col gap-5" style={{ animation: "fadeUp 0.72s cubic-bezier(0.22,1,0.36,1) backwards" }}>
           <div className="flex flex-col gap-3">
-            <p className="font-semibold text-[26px] leading-[34px] text-[#111] sm:text-[28px] sm:leading-[38px]">
+            <p className="font-semibold text-[26px] leading-8.5 text-[#111] sm:text-[28px] sm:leading-9.5">
               {work.title}
             </p>
-            <p className={`font-light text-base leading-[22px] ${muted}`}>{work.description}</p>
+            <p className={`font-light text-base leading-5.5 ${muted}`}>{work.description}</p>
           </div>
 
           <div className="w-full rounded-2xl bg-[#F8F8F8] border border-[#E9E9E9] p-1.5 pb-3 flex flex-col gap-3 sm:rounded-[20px]">
@@ -401,12 +401,12 @@ export default async function WorkDetailPage({
               <div className="w-full bg-[#FBFBFB] rounded-xl border border-[#F0F0F0] p-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="grid w-full grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:w-auto sm:flex sm:items-center sm:gap-8">
                   <div className="flex flex-col gap-0.5">
-                    <p className={`font-medium text-base leading-[22px] ${muted}`}>Role</p>
-                    <p className={`font-light text-sm leading-[17px] ${muted}`}>{work.meta.role}</p>
+                    <p className={`font-medium text-base leading-5.5 ${muted}`}>Role</p>
+                    <p className={`font-light text-sm leading-4.25 ${muted}`}>{work.meta.role}</p>
                   </div>
                   <div className="flex flex-col gap-0.5">
-                    <p className={`font-medium text-base leading-[22px] ${muted}`}>Timeline</p>
-                    <p className={`font-light text-sm leading-[17px] ${muted}`}>{work.meta.timeline}</p>
+                    <p className={`font-medium text-base leading-5.5 ${muted}`}>Timeline</p>
+                    <p className={`font-light text-sm leading-4.25 ${muted}`}>{work.meta.timeline}</p>
                   </div>
                 </div>
 
@@ -415,10 +415,10 @@ export default async function WorkDetailPage({
                     href={work.meta.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group/visit flex items-center gap-[5px] font-light text-sm leading-[17px] ${muted} underline`}
+                    className={`group/visit flex items-center gap-1.25 font-light text-sm leading-4.25 ${muted} underline`}
                   >
                     Visit website
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(17,17,17,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-150 group-hover/visit:translate-x-[2px] group-hover/visit:-translate-y-[2px]">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(17,17,17,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-150 group-hover/visit:translate-x-0.5 group-hover/visit:-translate-y-0.5">
                       <path d="M7 17L17 7" /><path d="M7 7h10v10" />
                     </svg>
                   </a>

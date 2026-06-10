@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FadeUp }   from "@/app/components/FadeUp";
 import { Footer }   from "@/app/components/Footer";
 import { SiteNav }  from "@/app/components/SiteNav";
@@ -22,8 +23,8 @@ export default function WorkPage() {
           <FadeUp>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4 text-sm text-[#111] whitespace-nowrap">
-                <p className="font-medium tracking-[1.4px] uppercase leading-[22px]">Work</p>
-                <p className="font-light opacity-80 leading-[22px]">
+                <p className="font-medium tracking-[1.4px] uppercase leading-5.5">Work</p>
+                <p className="font-light opacity-80 leading-5.5">
                   {String(projects.length).padStart(2, "0")}
                 </p>
               </div>
@@ -52,8 +53,8 @@ export default function WorkPage() {
           <FadeUp>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4 text-sm text-[#111] whitespace-nowrap">
-                <p className="font-medium tracking-[1.4px] uppercase leading-[22px]">Exploration</p>
-                <p className="font-light opacity-80 leading-[22px]">07</p>
+                <p className="font-medium tracking-[1.4px] uppercase leading-5.5">Exploration</p>
+                <p className="font-light opacity-80 leading-5.5">07</p>
               </div>
               <div className="flex-1 h-px bg-black/10" />
             </div>
@@ -61,9 +62,11 @@ export default function WorkPage() {
 
           {[1, 2, 3, 4, 5, 6, 7].map((n, i) => (
             <FadeUp key={n} delay={i * 0.05}>
-              <img
+              <Image
                 src={`/works/exploration/image-${n}.png`}
                 alt={`Exploration ${n}`}
+                width={1200}
+                height={800}
                 className="w-full h-auto block rounded-xl"
               />
             </FadeUp>

@@ -19,7 +19,7 @@ export default function HomePage() {
     <div className="bg-[#fafafa] min-h-screen">
       <SiteNav activePage="home" />
 
-      <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-20 lg:px-0 lg:pt-[136px]">
+      <div className="page-content-shell mx-auto flex w-full max-w-155 flex-col gap-16 px-5 pb-16 pt-14 sm:px-8 sm:pb-20 lg:gap-20 lg:px-0 lg:pt-34">
 
         {/* ── Author ── */}
         <div className="flex flex-col gap-6">
@@ -29,7 +29,7 @@ export default function HomePage() {
                 <CharReveal text="Rizal Vahlevi" startDelay={0.1} />
               </p>
               <motion.p
-                className="text-base leading-[22px]"
+                className="text-base leading-5.5"
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.55, ease, delay: 0.52 }}
@@ -48,7 +48,7 @@ export default function HomePage() {
             transition={{ duration: 0.65, ease, delay: 0.62 }}
           >
             <div className="flex flex-col gap-1">
-              <p className={`font-light text-base leading-[22px] ${muted}`}>
+              <p className={`font-light text-base leading-5.5 ${muted}`}>
                 Exploring many things while designing. Open for project
               </p>
               <div className="flex items-center gap-1">
@@ -58,7 +58,7 @@ export default function HomePage() {
                 </svg>
                 <a
                   href="mailto:vahlephic@gmail.com"
-                  className={`min-w-0 break-all font-medium text-base leading-[22px] ${muted} underline`}
+                  className={`min-w-0 break-all font-medium text-base leading-5.5 ${muted} underline`}
                 >
                   vahlephic@gmail.com
                 </a>
@@ -78,8 +78,8 @@ export default function HomePage() {
           <FadeUp>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4 text-sm text-[#111] whitespace-nowrap">
-                <p className="font-medium tracking-[1.4px] uppercase leading-[22px]">Work</p>
-                <p className="font-light opacity-80 leading-[22px]">03</p>
+                <p className="font-medium tracking-[1.4px] uppercase leading-5.5">Work</p>
+                <p className="font-light opacity-80 leading-5.5">03</p>
               </div>
               <div className="flex-1 h-px bg-black/10" />
             </div>

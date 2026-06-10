@@ -149,7 +149,7 @@ html[data-theme="dark"] [class*="bg-black/30"] {
   background-color: rgba(255, 255, 255, 0.13) !important;
 }
 
-html[data-theme="dark"] [class*="hover:bg-black/[0.025]"]:hover {
+html[data-theme="dark"] [class*="hover:bg-black/2.5"]:hover {
   background-color: rgba(255, 255, 255, 0.04) !important;
 }
 
