@@ -16,4 +16,4 @@ export const ASSETS = {
 } as const;
 
 export const CV_URL =
-  "https://drive.google.com/file/d/1GXsLufZDGFd8XLUrG6vti1HrxOAW-3q0/view?usp=sharing";
+  "https://drive.google.com/drive/u/1/folders/18oe8hXgYVU5mu_Am96ahAOqIeXuJoL_f";
