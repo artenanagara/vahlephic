@@ -27,16 +27,17 @@ export function ProjectCardFooter({ project }: { project: Project }) {
           <span className={`font-light text-sm leading-4.25 ${muted} whitespace-nowrap`}>
             Visit App:
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center gap-2">
             {project.appStores.includes("googlePlay") && (
               <a
                 href={project.appStoreUrls?.googlePlay}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-transform duration-150 hover:scale-110 active:scale-95"
+                className={`flex items-center gap-1.5 font-light text-sm leading-4.25 ${muted} underline transition-transform duration-150 hover:scale-105 active:scale-95`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ASSETS.googlePlay} alt="Google Play" className="theme-store-icon size-7" />
+                <img src={ASSETS.googlePlay} alt="" className="theme-store-icon size-5" />
+                Playstore
               </a>
             )}
             {project.appStores.includes("apple") && (
@@ -44,10 +45,11 @@ export function ProjectCardFooter({ project }: { project: Project }) {
                 href={project.appStoreUrls?.apple}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-transform duration-150 hover:scale-110 active:scale-95"
+                className={`flex items-center gap-1.5 font-light text-sm leading-4.25 ${muted} underline transition-transform duration-150 hover:scale-105 active:scale-95`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ASSETS.apple} alt="App Store" className="theme-store-icon size-7" />
+                <img src={ASSETS.apple} alt="" className="theme-store-icon size-5" />
+                Appstore
               </a>
             )}
           </div>
