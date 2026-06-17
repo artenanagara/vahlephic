@@ -36,7 +36,7 @@ export function ProjectCardFooter({ project }: { project: Project }) {
                 className="transition-transform duration-150 hover:scale-110 active:scale-95"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ASSETS.googlePlay} alt="Google Play" className="theme-store-icon size-5" />
+                <img src={ASSETS.googlePlay} alt="Google Play" className="theme-store-icon size-7" />
               </a>
             )}
             {project.appStores.includes("apple") && (
@@ -47,7 +47,7 @@ export function ProjectCardFooter({ project }: { project: Project }) {
                 className="transition-transform duration-150 hover:scale-110 active:scale-95"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ASSETS.apple} alt="App Store" className="theme-store-icon size-5" />
+                <img src={ASSETS.apple} alt="App Store" className="theme-store-icon size-7" />
               </a>
             )}
           </div>
